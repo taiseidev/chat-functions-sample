@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -29,11 +29,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_chat_ui: ^1.5.8
+  flutter_riverpod: ^1.0.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  file_picker: ^4.6.0
+  image_picker: ^0.8.5+3
+  open_file: ^3.2.1
+  uuid: ^3.0.6
+  mime: ^1.0.2
+  firebase_core: ^1.17.1
+  cloud_firestore: ^3.1.17
+  firebase_storage: ^10.2.17
 
 dev_dependencies:
   flutter_test:
@@ -51,11 +60,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/messages.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
