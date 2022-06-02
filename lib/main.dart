@@ -1,7 +1,6 @@
 import 'package:chat_functions_app/firebase_options.dart';
-import 'package:chat_functions_app/screen/chat_screen.dart';
-import 'package:chat_functions_app/screen/home_screen.dart';
-import 'package:chat_functions_app/screen/top_screen.dart';
+import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
+import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,9 +23,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TopScreen(),
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(
+            fontSize: 40,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        extensions: const <ThemeExtension<dynamic>>[
+          NormalButtonStyle(
+            title: 'はじめる',
+            borderRadius: 10,
+            primaryColor: Colors.black,
+          )
+        ],
+      ),
+      home: const TopScreen(),
     );
   }
 }

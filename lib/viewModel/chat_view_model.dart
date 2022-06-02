@@ -21,9 +21,7 @@ final chatViewModelProvider =
 );
 
 class ChatViewModel extends StateNotifier<List<types.Message>> {
-  ChatViewModel(this.ref) : super([]) {
-    // fetchChatMessage();
-  }
+  ChatViewModel(this.ref) : super([]) {}
 
   Ref ref;
 
