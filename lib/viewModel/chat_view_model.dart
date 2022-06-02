@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:chat_functions_app/service/firestore_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +22,7 @@ final chatViewModelProvider =
 
 class ChatViewModel extends StateNotifier<List<types.Message>> {
   ChatViewModel(this.ref) : super([]) {
-    loadMessages();
+    // fetchChatMessage();
   }
 
   Ref ref;
@@ -153,15 +155,5 @@ class ChatViewModel extends StateNotifier<List<types.Message>> {
     );
 
     addMessage(textMessage);
-  }
-
-  // チャットメッセージを取得
-  void loadMessages() async {
-    final response = await rootBundle.loadString('assets/messages.json');
-    final messages = (jsonDecode(response) as List)
-        .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
-        .toList();
-
-    state = messages;
   }
 }
