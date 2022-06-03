@@ -1,4 +1,4 @@
-import 'package:chat_functions_app/service/firestore_service.dart';
+import 'package:chat_functions_app/service/firebase_service.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -18,13 +18,13 @@ class ChatPage extends ConsumerWidget {
             backgroundColor: Colors.white,
             elevation: 0.5,
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_new,
                 color: Colors.black,
               ),
               onPressed: () => Navigator.pop(context),
             ),
-            title: Text(
+            title: const Text(
               '大西泰生',
               style: TextStyle(color: Colors.black),
             ),
@@ -33,8 +33,8 @@ class ChatPage extends ConsumerWidget {
             data: ((message) {
               return Chat(
                 // メッセージ入力欄を制御
-                theme: DefaultChatTheme(
-                  inputTextDecoration: const InputDecoration(
+                theme: const DefaultChatTheme(
+                  inputTextDecoration: InputDecoration(
                     filled: true,
                     // メッセージ入力フォームの色
                     // fillColor: Colors.red,
@@ -54,7 +54,7 @@ class ChatPage extends ConsumerWidget {
                   //   topRight: Radius.circular(20),
                   // ),
                   // padding
-                  inputPadding: const EdgeInsets.all(4),
+                  inputPadding: EdgeInsets.all(4),
                 ),
 
                 messages: message,

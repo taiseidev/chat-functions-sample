@@ -25,7 +25,7 @@ class NormalButton extends StatelessWidget {
         ),
         side: const BorderSide(),
       ),
-      onPressed: () => onTap,
+      onPressed: onTap,
       child: Text(title!),
     );
   }

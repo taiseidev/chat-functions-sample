@@ -1,5 +1,8 @@
 import 'package:chat_functions_app/components/normal_button.dart';
-import 'package:chat_functions_app/state/top_view_model.dart';
+import 'package:chat_functions_app/presentation/pages/home_screen.dart';
+import 'package:chat_functions_app/providers/top_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,13 +16,19 @@ class TopPageBody extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Who',
+            'Who...?',
           ),
           const SizedBox(
             height: 80,
           ),
           NormalButton(
-            onTap: () => ref.read(registerUserProvider),
+            onTap: () async {
+              await ref.read(registerUserProvider.notifier).registerUserData();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
+            },
           ),
         ],
       ),
