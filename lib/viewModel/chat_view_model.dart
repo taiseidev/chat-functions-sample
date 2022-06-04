@@ -1,17 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:open_file/open_file.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 final chatViewModelProvider =
@@ -20,7 +13,7 @@ final chatViewModelProvider =
 );
 
 class ChatViewModel extends StateNotifier<List<types.Message>> {
-  ChatViewModel(this.ref) : super([]) {}
+  ChatViewModel(this.ref) : super([]);
 
   Ref ref;
 
@@ -154,3 +147,9 @@ class ChatViewModel extends StateNotifier<List<types.Message>> {
     addMessage(textMessage);
   }
 }
+
+final chatIndexProvider = StateProvider((_) => 0);
+final sendSomeoneIndexProvider = StateProvider((_) => 0);
+final widthProvider = StateProvider((_) => 200.0);
+final heightProvider = StateProvider((_) => 200.0);
+final offSetProvider = StateProvider((_) => Offset(10, 10));
