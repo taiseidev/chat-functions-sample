@@ -21,10 +21,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserModel {
   String get id => throw _privateConstructorUsedError;
-  String? get firstName => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
-  String? get lastName => throw _privateConstructorUsedError;
-  int? get lastSeen => throw _privateConstructorUsedError;
+  String get token => throw _privateConstructorUsedError;
+  bool get isChatted => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -40,10 +38,8 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      String? firstName,
-      String? imageUrl,
-      String? lastName,
-      int? lastSeen,
+      String token,
+      bool isChatted,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -59,10 +55,8 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? firstName = freezed,
-    Object? imageUrl = freezed,
-    Object? lastName = freezed,
-    Object? lastSeen = freezed,
+    Object? token = freezed,
+    Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -71,22 +65,14 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: lastName == freezed
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastSeen: lastSeen == freezed
-          ? _value.lastSeen
-          : lastSeen // ignore: cast_nullable_to_non_nullable
-              as int?,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      isChatted: isChatted == freezed
+          ? _value.isChatted
+          : isChatted // ignore: cast_nullable_to_non_nullable
+              as bool,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -107,10 +93,8 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   $Res call(
       {String id,
-      String? firstName,
-      String? imageUrl,
-      String? lastName,
-      int? lastSeen,
+      String token,
+      bool isChatted,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -128,10 +112,8 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? firstName = freezed,
-    Object? imageUrl = freezed,
-    Object? lastName = freezed,
-    Object? lastSeen = freezed,
+    Object? token = freezed,
+    Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -140,22 +122,14 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: lastName == freezed
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastSeen: lastSeen == freezed
-          ? _value.lastSeen
-          : lastSeen // ignore: cast_nullable_to_non_nullable
-              as int?,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      isChatted: isChatted == freezed
+          ? _value.isChatted
+          : isChatted // ignore: cast_nullable_to_non_nullable
+              as bool,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -173,10 +147,8 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   const _$_UserModel(
       {required this.id,
-      this.firstName,
-      this.imageUrl,
-      this.lastName,
-      this.lastSeen,
+      required this.token,
+      this.isChatted = false,
       required this.createdAt,
       required this.updatedAt});
 
@@ -186,13 +158,10 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   @override
   final String id;
   @override
-  final String? firstName;
+  final String token;
   @override
-  final String? imageUrl;
-  @override
-  final String? lastName;
-  @override
-  final int? lastSeen;
+  @JsonKey()
+  final bool isChatted;
   @override
   final DateTime createdAt;
   @override
@@ -200,7 +169,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(id: $id, firstName: $firstName, imageUrl: $imageUrl, lastName: $lastName, lastSeen: $lastSeen, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, token: $token, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -209,10 +178,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
     properties
       ..add(DiagnosticsProperty('type', 'UserModel'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('firstName', firstName))
-      ..add(DiagnosticsProperty('imageUrl', imageUrl))
-      ..add(DiagnosticsProperty('lastName', lastName))
-      ..add(DiagnosticsProperty('lastSeen', lastSeen))
+      ..add(DiagnosticsProperty('token', token))
+      ..add(DiagnosticsProperty('isChatted', isChatted))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt));
   }
@@ -223,10 +190,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
-            const DeepCollectionEquality().equals(other.lastName, lastName) &&
-            const DeepCollectionEquality().equals(other.lastSeen, lastSeen) &&
+            const DeepCollectionEquality().equals(other.token, token) &&
+            const DeepCollectionEquality().equals(other.isChatted, isChatted) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
@@ -236,10 +201,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(imageUrl),
-      const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(lastSeen),
+      const DeepCollectionEquality().hash(token),
+      const DeepCollectionEquality().hash(isChatted),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt));
 
@@ -257,10 +220,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
       {required final String id,
-      final String? firstName,
-      final String? imageUrl,
-      final String? lastName,
-      final int? lastSeen,
+      required final String token,
+      final bool isChatted,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$_UserModel;
 
@@ -270,13 +231,9 @@ abstract class _UserModel implements UserModel {
   @override
   String get id => throw _privateConstructorUsedError;
   @override
-  String? get firstName => throw _privateConstructorUsedError;
+  String get token => throw _privateConstructorUsedError;
   @override
-  String? get imageUrl => throw _privateConstructorUsedError;
-  @override
-  String? get lastName => throw _privateConstructorUsedError;
-  @override
-  int? get lastSeen => throw _privateConstructorUsedError;
+  bool get isChatted => throw _privateConstructorUsedError;
   @override
   DateTime get createdAt => throw _privateConstructorUsedError;
   @override

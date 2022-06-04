@@ -8,10 +8,8 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
   const factory UserModel({
     required String id,
-    String? firstName,
-    String? imageUrl,
-    String? lastName,
-    int? lastSeen,
+    required String token,
+    @Default(false) bool isChatted,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _UserModel;
