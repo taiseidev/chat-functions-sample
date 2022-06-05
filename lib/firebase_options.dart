@@ -67,8 +67,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '603679615508',
     projectId: 'chatchat-5e181',
     storageBucket: 'chatchat-5e181.appspot.com',
-    iosClientId: '603679615508-9k955aft6b5io8260dv1r24fv09emgaf.apps.googleusercontent.com',
-    iosBundleId: 'com.example.chatFunctionsApp',
+    iosClientId:
+        '603679615508-9k955aft6b5io8260dv1r24fv09emgaf.apps.googleusercontent.com',
+    iosBundleId: 'com.j.chatFunctionsApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '603679615508',
     projectId: 'chatchat-5e181',
     storageBucket: 'chatchat-5e181.appspot.com',
-    iosClientId: '603679615508-9k955aft6b5io8260dv1r24fv09emgaf.apps.googleusercontent.com',
-    iosBundleId: 'com.example.chatFunctionsApp',
+    iosClientId:
+        '603679615508-9k955aft6b5io8260dv1r24fv09emgaf.apps.googleusercontent.com',
+    iosBundleId: 'com.j.chatFunctionsApp',
   );
 }
