@@ -14,6 +14,7 @@ class RegisterUserNotifier with ChangeNotifier {
   Future<void> registerUserData() async {
     try {
       final user = await FirebaseService.registerUser();
+      // firestoreのuidを取得
       final uid = user.user!.uid;
       await FirebaseService.registerUserDataToFirestore(uid);
     } on FirebaseException catch (err) {

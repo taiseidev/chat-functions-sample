@@ -24,7 +24,9 @@ class TopPageBody extends ConsumerWidget {
               ref.read(registerUserProvider.notifier).registerUserData();
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
               );
             },
           ),

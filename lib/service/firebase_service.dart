@@ -12,6 +12,7 @@ class FirebaseService {
   }
 
   static Future<void> registerUserDataToFirestore(String uid) async {
+    // devicetokenを取得
     final token = await FCMConfig.instance.messaging.getToken();
     try {
       await FirebaseFirestore.instance.collection('user').doc(uid).set({
