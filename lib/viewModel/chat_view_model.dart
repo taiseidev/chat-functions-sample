@@ -150,6 +150,3 @@ class ChatViewModel extends StateNotifier<List<types.Message>> {
 
 final chatIndexProvider = StateProvider((_) => 0);
 final sendSomeoneIndexProvider = StateProvider((_) => 0);
-final widthProvider = StateProvider((_) => 200.0);
-final heightProvider = StateProvider((_) => 200.0);
-final offSetProvider = StateProvider((_) => Offset(10, 10));
