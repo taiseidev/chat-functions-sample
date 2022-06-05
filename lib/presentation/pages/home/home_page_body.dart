@@ -13,6 +13,6 @@ class HomePageBody extends ConsumerWidget {
     if (selectedIndex == 1) {
       return SettingScreen();
     }
-    return ChatPage();
+    return const ChatPage();
   }
 }

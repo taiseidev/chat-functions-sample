@@ -1,6 +1,6 @@
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
-import 'package:chat_functions_app/providers/top_provider.dart';
+import 'package:chat_functions_app/viewModel/top_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
