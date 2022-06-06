@@ -1,6 +1,8 @@
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -33,7 +35,18 @@ class SendSomeone extends ConsumerWidget {
         alignment: Alignment.center,
         children: [
           NormalButton(
-            onTap: (() => ref.read(sendSomeoneIndexProvider.notifier).state++),
+            onTap: (() async {
+              try {
+                ref.read(sendSomeoneIndexProvider.notifier).state++;
+                final dio = Dio();
+                final result = await dio.get(
+                    'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone');
+                print(result.data);
+                dio.close();
+              } on FirebaseFunctionsException catch (err) {
+                print(err);
+              }
+            }),
             style: const NormalButtonStyle(title: '誰かに送信'),
           ),
           Lottie.asset(
