@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
@@ -12,9 +12,8 @@ class FirebaseService {
   }
 
   static Future<void> registerUserDataToFirestore(String uid) async {
-    // devicetokenを取得
-    final token = await FCMConfig.instance.messaging.getToken();
     try {
+      final token = await FirebaseMessaging.instance.getToken();
       await FirebaseFirestore.instance.collection('user').doc(uid).set({
         'id': uid,
         'deviceToken': token,

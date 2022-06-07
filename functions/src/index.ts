@@ -15,11 +15,11 @@ export const sendMessageSomeone = functions
       });
     console.log(name);
 
-    // sendPushNotification(
-    //   "dHgFM9pjvEX-hTxXVTw3hX:APA91bEwYnewmUU0gT6gwThwAXJMqqOPT43al_oYifjr9uc1-XR286vN2WDvvJ17y9iX5uGRRWfPiPggarzxGW66pMNfE1YwGl0LFujkV9bbr3SPbSYT4z6ILpne6Q4g3-xIjiJdzPa-",
-    //   "通知テスト",
-    //   "TypeScript意味わからなさすぎです。"
-    // );
+    sendPushNotification(
+      "dHgFM9pjvEX-hTxXVTw3hX:APA91bEwYnewmUU0gT6gwThwAXJMqqOPT43al_oYifjr9uc1-XR286vN2WDvvJ17y9iX5uGRRWfPiPggarzxGW66pMNfE1YwGl0LFujkV9bbr3SPbSYT4z6ILpne6Q4g3-xIjiJdzPa-",
+      "通知テスト",
+      "TypeScript意味わからなさすぎです。"
+    );
     res.status(200).send({
       result: name,
     });
@@ -27,20 +27,20 @@ export const sendMessageSomeone = functions
   });
 
 // payloadを指定
-// const sendPushNotification = function (
-//   token: string,
-//   title: string,
-//   body: string
-// ) {
-//   const payload = {
-//     notification: {
-//       title: title,
-//       body: body,
-//       sound: "default",
-//     },
-//   };
-//   const option = {
-//     priority: "high",
-//   };
-//   admin.messaging().sendToDevice(token, payload, option);
-// };
+const sendPushNotification = function (
+  token: string,
+  title: string,
+  body: string
+) {
+  const payload = {
+    notification: {
+      title: title,
+      body: body,
+      sound: "default",
+    },
+  };
+  const option = {
+    priority: "high",
+  };
+  admin.messaging().sendToDevice(token, payload, option);
+};

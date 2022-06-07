@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAunzxUgPMksntjnT07ah3F4pC-4rSCX84',
-    appId: '1:603679615508:android:7e5603a3470aebac781501',
+    appId: '1:603679615508:android:9a8ade977706166c781501',
     messagingSenderId: '603679615508',
     projectId: 'chatchat-5e181',
     storageBucket: 'chatchat-5e181.appspot.com',
@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCvMGJVSiXhXUcKC0hGkYNEKyGmrL88XFY',
-    appId: '1:603679615508:ios:27f60c180b8b0608781501',
+    appId: '1:603679615508:ios:60a3dd624bdf1399781501',
     messagingSenderId: '603679615508',
     projectId: 'chatchat-5e181',
     storageBucket: 'chatchat-5e181.appspot.com',
