@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "603679615508-fa1qp40g1m4i6ccl8mheu668in5143ho.apps.googleusercontent.com",
+              "client_id": "603679615508-9k955aft6b5io8260dv1r24fv09emgaf.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "jp.com.chatapp"
+                "bundle_id": "com.example.chatFunctionsApp"
               }
             }
           ]
