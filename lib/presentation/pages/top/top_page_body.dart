@@ -19,15 +19,18 @@ class TopPageBody extends ConsumerWidget {
           const SizedBox(
             height: 80,
           ),
+          // 匿名認証のボタン
           NormalButton(
-            onTap: () {
-              ref.read(registerUserProvider.notifier).registerUserData();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-              );
+            onTap: () async {
+              final result = await ref.read(registerUserProvider.future);
+              if (result) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
+              }
             },
           ),
         ],
