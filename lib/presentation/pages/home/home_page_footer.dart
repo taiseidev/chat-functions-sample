@@ -20,8 +20,9 @@ class HomePageFooter extends ConsumerWidget {
         ),
       ],
       currentIndex: selectedIndex,
-      onTap: (index) =>
-          ref.read(homeBottomNavigationIndexProvider.notifier).state = index,
+      onTap: (index) => ref
+          .read(homeBottomNavigationIndexProvider.notifier)
+          .update((state) => state = index),
     );
   }
 }
