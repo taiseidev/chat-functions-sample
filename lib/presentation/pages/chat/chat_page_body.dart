@@ -12,40 +12,31 @@ class ChatPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.watch(chatIndexProvider);
+    final isChatted = ref.watch(isChattedProvider);
     return IndexedStack(
-      index: index,
-      children: [
+      index: isChatted,
+      children: const [
         SendSomeone(),
-        const Text('テスト'),
+        Text('チャット中です'),
       ],
     );
   }
 }
 
 class SendSomeone extends ConsumerWidget {
-  SendSomeone({Key? key}) : super(key: key);
-  double top = 0;
+  const SendSomeone({Key? key}) : super(key: key);
+  final double top = 0;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: IndexedStack(
-        index: ref.watch(sendSomeoneIndexProvider),
+        index: ref.watch(isSendedProvider),
         alignment: Alignment.center,
         children: [
           NormalButton(
             onTap: (() async {
-              try {
-                ref.read(sendSomeoneIndexProvider.notifier).state++;
-                final dio = Dio();
-                final result = await dio.get(
-                    'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone');
-                print(result.data);
-                dio.close();
-              } on FirebaseFunctionsException catch (err) {
-                print(err);
-              }
+              ref.read(isSendedProvider.notifier).state++;
             }),
             style: const NormalButtonStyle(title: '誰かに送信'),
           ),
