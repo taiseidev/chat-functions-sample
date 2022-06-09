@@ -14,8 +14,7 @@ class DioDataSource {
   DioDataSource(this.dio);
   Dio dio;
   Future<Response> sendMessageForSomeone() async {
-    print('発火しているか？？');
-    final response = await dio.request(
+    final response = await dio.get(
         'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone');
     return response;
   }
