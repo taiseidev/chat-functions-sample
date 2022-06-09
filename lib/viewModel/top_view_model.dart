@@ -1,4 +1,4 @@
-import 'package:chat_functions_app/service/firebase_service.dart';
+import 'package:chat_functions_app/data/service/firebase_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

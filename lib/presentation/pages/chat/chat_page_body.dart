@@ -1,8 +1,6 @@
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
-import 'package:cloud_functions/cloud_functions.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -37,6 +35,7 @@ class SendSomeone extends ConsumerWidget {
           NormalButton(
             onTap: (() async {
               ref.read(isSendedProvider.notifier).state++;
+              ref.read(SendMessageForSomeoneViewModelProvider);
             }),
             style: const NormalButtonStyle(title: '誰かに送信'),
           ),
