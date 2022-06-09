@@ -1,4 +1,4 @@
-import 'package:chat_functions_app/service/firebase_service.dart';
+import 'package:chat_functions_app/data/service/firebase_service.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';

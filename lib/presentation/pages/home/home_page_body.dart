@@ -11,7 +11,7 @@ class HomePageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(homeBottomNavigationIndexProvider);
     if (selectedIndex == 1) {
-      return SettingScreen();
+      return const SettingScreen();
     }
     return const ChatPage();
   }

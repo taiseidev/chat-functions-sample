@@ -1,3 +1,4 @@
+import 'package:chat_functions_app/domain/send_message_for_someone.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -148,5 +149,11 @@ class ChatViewModel extends StateNotifier<List<types.Message>> {
   }
 }
 
-final chatIndexProvider = StateProvider((_) => 0);
-final sendSomeoneIndexProvider = StateProvider((_) => 0);
+// チャット中かそうでないか。UserモデルのisChattedを参照
+final isChattedProvider = StateProvider((_) => 0);
+// チャット送信済みかそうでないか
+final isSendedProvider = StateProvider((_) => 0);
+
+final SendMessageForSomeoneViewModelProvider = Provider<void>(
+  (ref) => ref.read(sendMessageForSomeoneUseCaseProvider).call(),
+);
