@@ -154,6 +154,6 @@ final isChattedProvider = StateProvider((_) => 0);
 // チャット送信済みかそうでないか
 final isSendedProvider = StateProvider((_) => 0);
 
-final SendMessageForSomeoneViewModelProvider = Provider<void>(
+final sendMessageForSomeoneViewModelProvider = Provider<void>(
   (ref) => ref.read(sendMessageForSomeoneUseCaseProvider).call(),
 );
