@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>603679615508-m9ueq8f7ubj5ul3557uklknu0qlrbbh3.apps.googleusercontent.com</string>
+	<string>603679615508-a6ngui0s2kru39ki2fihef84i3gk8vr0.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.603679615508-m9ueq8f7ubj5ul3557uklknu0qlrbbh3</string>
+	<string>com.googleusercontent.apps.603679615508-a6ngui0s2kru39ki2fihef84i3gk8vr0</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCvMGJVSiXhXUcKC0hGkYNEKyGmrL88XFY</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.j.chatFunctionsApp</string>
+	<string>com.jp.chatFunctionsApp</string>
 	<key>PROJECT_ID</key>
 	<string>chatchat-5e181</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:603679615508:ios:60a3dd624bdf1399781501</string>
+	<string>1:603679615508:ios:8fd52c70cd54af8d781501</string>
 </dict>
 </plist>
