@@ -34,8 +34,10 @@ class SendSomeone extends ConsumerWidget {
         children: [
           NormalButton(
             onTap: (() async {
-              ref.read(isSendedProvider.notifier).state++;
-              ref.read(sendMessageForSomeoneViewModelProvider);
+              ref.read(isSendedProvider.notifier).state = 1;
+              await ref.read(sendMessageForSomeoneViewModelProvider.future);
+              await Future.delayed(const Duration(seconds: 3)).then(
+                  (value) => ref.read(isSendedProvider.notifier).state = 0);
             }),
             style: const NormalButtonStyle(title: '誰かに送信'),
           ),

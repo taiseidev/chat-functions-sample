@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // 依存性注入（DI）を再現したかったが、Dioのインスタンスを渡すだけだと意味ない気がする。
@@ -14,11 +16,18 @@ class DioDataSource {
   DioDataSource(this.dio);
   Dio dio;
   Future<Response> sendMessageForSomeone() async {
-    dio.interceptors.add(LogInterceptor());
-    final response = await dio.request(
+    final token = await FirebaseMessaging.instance.getToken();
+    dio.interceptors.add(
+      LogInterceptor(),
+    );
+    final response = await dio.post(
       'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone',
+      data: {
+        'currentUserId': token,
+      },
       options: Options(contentType: Headers.formUrlEncodedContentType),
     );
+    print('レスポンス：${response.data}');
     return response;
   }
 }
