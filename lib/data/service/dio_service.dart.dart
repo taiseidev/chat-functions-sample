@@ -14,8 +14,11 @@ class DioDataSource {
   DioDataSource(this.dio);
   Dio dio;
   Future<Response> sendMessageForSomeone() async {
-    final response = await dio.get(
-        'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone');
+    dio.interceptors.add(LogInterceptor());
+    final response = await dio.request(
+      'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone',
+      options: Options(contentType: Headers.formUrlEncodedContentType),
+    );
     return response;
   }
 }
