@@ -6,18 +6,22 @@ admin.initializeApp();
 export const sendMessageSomeone = functions
   .region("asia-northeast1")
   .https.onRequest(async (request: any, response: any) => {
+    if (request.method != "POST") {
+      response
+        .status(400)
+        .send("予期しないエラーが発生しました。再度お試しください");
+    }
     try {
-      const snapshot = await admin
-        .firestore()
-        .doc("user/bR8PdYVVksSQvP1v0bwwIsmIiCM2")
-        .get();
-      const data = snapshot.data();
+      console.log(`deviceToken:${request.body["currentUserId"]}`);
       sendPushNotification(
-        data!["deviceToken"],
-        "チャット依頼を送信しました",
-        `${data!["id"]}さんにチャットメッセージを送信しました。`
+        request.body["currentUserId"],
+        "送信しました",
+        `○○さんにチャット依頼を送信しました。`
       );
-      response.send(data);
+      response.send({
+        name: "大西 泰生",
+        deviceToken: request.body["currentUserId"],
+      });
     } catch (error) {
       console.log(error);
       response.status(500).send(error);
