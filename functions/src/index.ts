@@ -1,32 +1,29 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-admin.initializeApp(functions.config().firebase);
-var firestore = admin.firestore();
+import functions = require("firebase-functions");
+import admin = require("firebase-admin");
+admin.initializeApp();
 
-// ランダムなユーザーにメッセージを送信する関数
+// method to send a message to a random user
 export const sendMessageSomeone = functions
   .region("asia-northeast1")
-  .https.onRequest((req: any, res: any) => async () => {
-    var name: string = await firestore
-      .collection("user")
-      .get("FFqqVnaMHsfiYKmUfO3J2R6vLsy1")
-      .then((doc: any) => {
-        return doc.data().name;
-      });
-    console.log(name);
-
-    sendPushNotification(
-      "dHgFM9pjvEX-hTxXVTw3hX:APA91bEwYnewmUU0gT6gwThwAXJMqqOPT43al_oYifjr9uc1-XR286vN2WDvvJ17y9iX5uGRRWfPiPggarzxGW66pMNfE1YwGl0LFujkV9bbr3SPbSYT4z6ILpne6Q4g3-xIjiJdzPa-",
-      "通知テスト",
-      "TypeScript意味わからなさすぎです。"
-    );
-    res.status(200).send({
-      result: name,
-    });
-    res.end();
+  .https.onRequest(async (request: any, response: any) => {
+    try {
+      const snapshot = await admin
+        .firestore()
+        .doc("user/bR8PdYVVksSQvP1v0bwwIsmIiCM2")
+        .get();
+      const data = snapshot.data();
+      sendPushNotification(
+        data!["deviceToken"],
+        "チャット依頼を送信しました",
+        `${data!["id"]}さんにチャットメッセージを送信しました。`
+      );
+      response.send(data);
+    } catch (error) {
+      console.log(error);
+      response.status(500).send(error);
+    }
   });
 
-// payloadを指定
 const sendPushNotification = function (
   token: string,
   title: string,
