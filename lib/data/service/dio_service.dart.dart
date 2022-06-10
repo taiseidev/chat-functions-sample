@@ -16,18 +16,18 @@ class DioDataSource {
   DioDataSource(this.dio);
   Dio dio;
   Future<Response> sendMessageForSomeone() async {
-    final token = await FirebaseMessaging.instance.getToken();
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     dio.interceptors.add(
       LogInterceptor(),
     );
     final response = await dio.post(
       'https://asia-northeast1-chatchat-5e181.cloudfunctions.net/sendMessageSomeone',
       data: {
-        'currentUserId': token,
+        'senderId': uid,
       },
       options: Options(contentType: Headers.formUrlEncodedContentType),
     );
-    print('レスポンス：${response.data}');
+    print('RESPONSE${response.data}');
     return response;
   }
 }
