@@ -1,4 +1,5 @@
 import 'package:chat_functions_app/domain/send_message_for_someone.dart';
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -154,6 +155,6 @@ final isChattedProvider = StateProvider((_) => 0);
 // チャット送信済みかそうでないか
 final isSendedProvider = StateProvider((_) => 0);
 
-final sendMessageForSomeoneViewModelProvider = Provider<void>(
+final sendMessageForSomeoneViewModelProvider = FutureProvider<Response>(
   (ref) => ref.read(sendMessageForSomeoneUseCaseProvider).call(),
 );

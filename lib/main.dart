@@ -1,8 +1,8 @@
 import 'package:chat_functions_app/firebase_options.dart';
 import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
 import 'package:chat_functions_app/theme/normal_button_style.dart';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +11,10 @@ enum AuthorizationStatus {
   denied,
   notDetermined,
   provisional,
+}
+
+Future<void> _fcmBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
 }
 
 void main() async {
@@ -31,6 +35,21 @@ void main() async {
     sound: true,
   );
 
+  // fcm_configパッケージを初期化
+  await FCMConfig.instance.init(
+    // バックグラウンド、ターミーネーテッド状態通知
+    onBackgroundMessage: _fcmBackgroundHandler,
+    defaultAndroidChannel: const AndroidNotificationChannel(
+      'fcm_channel',
+      'Fcm config',
+    ),
+  );
+  // iosでフォアグラウンドでheads-up通知を受け取るための設定
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
   runApp(
     const ProviderScope(
       child: MyApp(),
