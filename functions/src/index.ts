@@ -1,26 +1,36 @@
 import functions = require("firebase-functions");
 import admin = require("firebase-admin");
 admin.initializeApp();
+const firestore = admin.firestore();
+
+const UNEXPECTED_ERROR_MESSAGE =
+  "予期しないエラーが発生しました。再度お試しください";
+const MESSAGE_TITLE = "チャット依頼が届きました👀";
 
 // method to send a message to a random user
 export const sendMessageSomeone = functions
   .region("asia-northeast1")
   .https.onRequest(async (request: any, response: any) => {
     if (request.method != "POST") {
-      response
-        .status(400)
-        .send("予期しないエラーが発生しました。再度お試しください");
+      response.status(400).send(UNEXPECTED_ERROR_MESSAGE);
     }
+    const userSnapShot = await firestore.collection("user").get();
+    const userList = userSnapShot.docs.map((doc) => doc.data());
     try {
-      console.log(`deviceToken:${request.body["currentUserId"]}`);
+      var randomNum = Math.floor(Math.random() * userList.length);
+      console.log(randomNum);
+      var deviceToken = userList[randomNum]["deviceToken"];
+
+      var senderId = request["senderId"];
+      console.log(`deviceToken:${deviceToken}`);
       sendPushNotification(
-        request.body["currentUserId"],
-        "送信しました",
-        `○○さんにチャット依頼を送信しました。`
+        deviceToken,
+        MESSAGE_TITLE,
+        `${senderId}さんと会話しよう💪`
       );
       response.send({
-        name: "大西 泰生",
-        deviceToken: request.body["currentUserId"],
+        deviceToken: deviceToken,
+        num: randomNum,
       });
     } catch (error) {
       console.log(error);
