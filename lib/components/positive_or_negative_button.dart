@@ -20,7 +20,13 @@ class PositiveOrNegativeButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(primary: backgroundColor),
       onPressed: () {},
-      child: Text(title!),
+      child: Text(
+        title!,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
