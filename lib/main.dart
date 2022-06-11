@@ -2,6 +2,7 @@ import 'package:chat_functions_app/firebase_options.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
 import 'package:chat_functions_app/theme/normal_button_style.dart';
+import 'package:chat_functions_app/theme/positive_or_negative_button_style.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,12 @@ class MyApp extends HookConsumerWidget {
             title: 'はじめる',
             borderRadius: 10,
             primaryColor: Colors.black,
-          )
+          ),
+          PositiveOrNegativeButtonStyle(
+            title: '',
+            radius: 10,
+            backgroundColor: Colors.blue,
+          ),
         ],
       ),
       home: isLogined == true ? const HomePage() : const TopPage(),
