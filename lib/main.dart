@@ -3,11 +3,9 @@ import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
 import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:fcm_config/fcm_config.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,22 +22,10 @@ Future<void> _fcmBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // FCMの通知権限リクエスト
-  final messaging = FirebaseMessaging.instance;
-  final result = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-
   // fcm_configパッケージを初期化
   await FCMConfig.instance.init(
     // バックグラウンド、ターミーネーテッド状態通知
@@ -49,12 +35,26 @@ void main() async {
       'Fcm config',
     ),
   );
-  // iosでフォアグラウンドでheads-up通知を受け取るための設定
-  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
+  // FCMの通知権限リクエスト
+  final messaging = FirebaseMessaging.instance;
+  await Future.wait([
+    // iosでフォアグラウンドでheads-up通知を受け取るための設定
+    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    ),
+    messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    ),
+  ]);
+
   runApp(
     ProviderScope(
       overrides: [
