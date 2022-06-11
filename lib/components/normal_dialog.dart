@@ -12,10 +12,10 @@ class NormalDialog extends StatelessWidget {
       content: Text('相手が許可するとチャットルームが開かれます📩'),
       actions: <Widget>[
         PositiveOrNegativeButton(
-          style: PositiveOrNegativeButtonStyle(title: 'やめる😢'),
+          title: 'やめる😢',
         ),
         PositiveOrNegativeButton(
-          style: PositiveOrNegativeButtonStyle(title: '送信🚀'),
+          title: '送信🚀',
         ),
       ],
     );
