@@ -5,23 +5,25 @@ class PositiveOrNegativeButton extends StatelessWidget {
   const PositiveOrNegativeButton({
     Key? key,
     this.style,
+    required this.title,
     this.onPressed,
   }) : super(key: key);
+  final String title;
   final PositiveOrNegativeButtonStyle? style;
   final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     final defaultStyle =
         Theme.of(context).extension<PositiveOrNegativeButtonStyle>();
-    final title = style?.title ?? defaultStyle!.title;
+
     final radius = style?.radius ?? defaultStyle!.radius;
     final backgroundColor =
         style?.backgroundColor ?? defaultStyle!.backgroundColor;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(primary: backgroundColor),
-      onPressed: () {},
+      onPressed: () => onPressed,
       child: Text(
-        title!,
+        title,
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,

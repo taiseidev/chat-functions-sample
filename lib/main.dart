@@ -95,8 +95,8 @@ class MyApp extends HookConsumerWidget {
             primaryColor: Colors.black,
           ),
           PositiveOrNegativeButtonStyle(
-            title: '',
             radius: 10,
+            textColor: Colors.white,
             backgroundColor: Colors.blue,
           ),
         ],

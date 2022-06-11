@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 class PositiveOrNegativeButtonStyle
     extends ThemeExtension<PositiveOrNegativeButtonStyle> {
   const PositiveOrNegativeButtonStyle({
-    this.title,
     this.radius,
+    this.textColor,
     this.backgroundColor,
   });
-  final String? title;
   final double? radius;
+  final Color? textColor;
   final Color? backgroundColor;
 
   @override
   ThemeExtension<PositiveOrNegativeButtonStyle> copyWith({
-    String? title,
     double? radius,
+    Color? textColor,
     Color? backgroundColor,
   }) =>
       PositiveOrNegativeButtonStyle(
-        title: title ?? this.title,
         radius: radius ?? this.radius,
+        textColor: textColor ?? this.textColor,
         backgroundColor: backgroundColor ?? this.backgroundColor,
       );
 
@@ -31,6 +31,7 @@ class PositiveOrNegativeButtonStyle
     }
 
     return PositiveOrNegativeButtonStyle(
+      textColor: Color.lerp(textColor, other.textColor, t),
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
     );
   }
