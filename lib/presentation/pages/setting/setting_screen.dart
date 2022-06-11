@@ -57,6 +57,7 @@ class SettingScreen extends StatelessWidget {
                 title: Text('バージョン'),
                 tiles: <SettingsTile>[
                   SettingsTile(
+                    enabled: false,
                     leading: Icon(Icons.handyman),
                     title: const Text('1.0.0'),
                   ),
