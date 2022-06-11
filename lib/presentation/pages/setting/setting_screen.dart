@@ -23,6 +23,21 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
               SettingsSection(
+                title: Text('チャット依頼'),
+                tiles: <SettingsTile>[
+                  SettingsTile.navigation(
+                    leading: Icon(Icons.mark_email_unread_outlined),
+                    title: Text('受信'),
+                    value: Text(''),
+                  ),
+                  SettingsTile.navigation(
+                    leading: Icon(Icons.mark_email_read_outlined),
+                    title: Text('送信'),
+                    value: Text(''),
+                  ),
+                ],
+              ),
+              SettingsSection(
                 title: Text('設定'),
                 tiles: <SettingsTile>[
                   SettingsTile.navigation(
