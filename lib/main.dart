@@ -90,14 +90,13 @@ class MyApp extends HookConsumerWidget {
         ),
         extensions: const <ThemeExtension<dynamic>>[
           NormalButtonStyle(
-            title: 'はじめる',
             borderRadius: 10,
             primaryColor: Colors.black,
           ),
           PositiveOrNegativeButtonStyle(
             radius: 10,
             textColor: Colors.white,
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.transparent,
           ),
         ],
       ),
