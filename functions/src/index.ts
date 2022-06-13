@@ -6,6 +6,7 @@ const firestore = admin.firestore();
 const UNEXPECTED_ERROR_MESSAGE =
   "予期しないエラーが発生しました。再度お試しください";
 const MESSAGE_TITLE = "チャット依頼が届きました👀";
+const MESSAGE_BODY = "さんと会話しよう💪";
 
 // method to send a message to a random user
 export const sendMessageSomeone = functions
@@ -16,24 +17,44 @@ export const sendMessageSomeone = functions
     }
     const userSnapShot = await firestore.collection("user").get();
     const userList = userSnapShot.docs.map((doc) => doc.data());
+    var randomNum = Math.floor(Math.random() * userList.length);
+    var receiverId = userList[randomNum]["id"];
+    var receiverName = userList[randomNum]["name"];
+    var receiverDeviceToken = userList[randomNum]["deviceToken"];
+    var data = request.body;
+    var senderId = data["senderId"];
+    var senderName = data["name"];
+    var senderDeviceToken = data["deviceToken"];
+
     try {
-      var randomNum = Math.floor(Math.random() * userList.length);
-      console.log(randomNum);
-      var deviceToken = userList[randomNum]["deviceToken"];
-      // bodyを指定してなかったからエラーになっていた。（こんくらい気付けよ...）
-      var data = request.body;
-      var senderId = data["senderId"];
+      // add receiverInfo for sender collection
       await firestore.collection("user").doc(senderId).collection("send").add({
-        deviceToken: "fjldjfldjlfjdl",
+        name: receiverName,
+        deviceToken: receiverDeviceToken,
+        isChatted: false,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
+      // add senderInfo for receiver collection
+      await firestore
+        .collection("user")
+        .doc(receiverId)
+        .collection("receive")
+        .add({
+          name: senderName,
+          deviceToken: senderDeviceToken,
+          isChatted: false,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
 
       sendPushNotification(
-        deviceToken,
+        receiverDeviceToken,
         MESSAGE_TITLE,
-        `fjldjfldjlfjdlさんと会話しよう💪`
+        `大西${MESSAGE_BODY}`
       );
       response.send({
-        deviceToken: deviceToken,
+        deviceToken: receiverDeviceToken,
         num: randomNum,
       });
     } catch (error) {
