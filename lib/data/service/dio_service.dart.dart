@@ -1,3 +1,4 @@
+import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -16,7 +17,7 @@ class DioDataSource {
   DioDataSource(this.dio);
   Dio dio;
   Future<Response> sendMessageForSomeone() async {
-    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final uid = await FirebaseUtil.getCurrentUserUid();
     dio.interceptors.add(
       LogInterceptor(),
     );

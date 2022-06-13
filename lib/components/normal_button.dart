@@ -5,16 +5,17 @@ class NormalButton extends StatelessWidget {
   const NormalButton({
     Key? key,
     this.style,
+    required this.title,
     required this.onTap,
   }) : super(key: key);
 
   final NormalButtonStyle? style;
   final VoidCallback onTap;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     final defaultStyle = Theme.of(context).extension<NormalButtonStyle>();
-    final title = style?.title ?? defaultStyle?.title;
     final primaryColor = style?.primaryColor ?? defaultStyle?.primaryColor;
     final borderRadius = style?.borderRadius ?? defaultStyle?.borderRadius;
     return OutlinedButton(
@@ -26,7 +27,7 @@ class NormalButton extends StatelessWidget {
         side: const BorderSide(),
       ),
       onPressed: onTap,
-      child: Text(title!),
+      child: Text(title),
     );
   }
 }

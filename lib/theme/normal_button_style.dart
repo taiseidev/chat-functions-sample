@@ -5,22 +5,18 @@ class NormalButtonStyle extends ThemeExtension<NormalButtonStyle> {
     Key? key,
     this.primaryColor,
     this.borderRadius,
-    this.title,
   }) : super();
 
   final Color? primaryColor;
   final double? borderRadius;
-  final String? title;
   @override
   ThemeExtension<NormalButtonStyle> copyWith({
     Color? primaryColor,
     double? borderRadius,
-    String? title,
   }) =>
       NormalButtonStyle(
         primaryColor: primaryColor ?? this.primaryColor,
         borderRadius: borderRadius ?? this.borderRadius,
-        title: title ?? this.title,
       );
 
   @override

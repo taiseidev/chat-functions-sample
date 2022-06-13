@@ -34,17 +34,13 @@ class SendSomeone extends ConsumerWidget {
         alignment: Alignment.center,
         children: [
           NormalButton(
+            title: '誰かに送信',
             onTap: (() async {
               showDialog(
                 context: context,
                 builder: (_) => NormalDialog(),
               );
-              // ref.read(isSendedProvider.notifier).state = 1;
-              // await ref.read(sendMessageForSomeoneViewModelProvider.future);
-              // await Future.delayed(const Duration(seconds: 3)).then(
-              //     (value) => ref.read(isSendedProvider.notifier).state = 0);
             }),
-            style: const NormalButtonStyle(title: '誰かに送信'),
           ),
           Lottie.asset(
             'assets/send-message.json',
