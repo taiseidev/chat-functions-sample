@@ -40,10 +40,6 @@ class SendSomeone extends ConsumerWidget {
                 context: context,
                 builder: (_) => NormalDialog(),
               );
-              // ref.read(isSendedProvider.notifier).state = 1;
-              // await ref.read(sendMessageForSomeoneViewModelProvider.future);
-              // await Future.delayed(const Duration(seconds: 3)).then(
-              //     (value) => ref.read(isSendedProvider.notifier).state = 0);
             }),
           ),
           Lottie.asset(
