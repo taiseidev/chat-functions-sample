@@ -23,11 +23,20 @@ export const sendMessageSomeone = functions
 
       var senderId = request["senderId"];
       console.log(`deviceToken:${deviceToken}`);
-      sendPushNotification(
-        deviceToken,
-        MESSAGE_TITLE,
-        `${senderId}さんと会話しよう💪`
-      );
+      await firestore
+        .collection("user")
+        .doc(senderId)
+        .collection("send")
+        .add({
+          deviceToken: deviceToken,
+        })
+        .then((value) => {
+          sendPushNotification(
+            deviceToken,
+            MESSAGE_TITLE,
+            `${senderId}さんと会話しよう💪`
+          );
+        });
       response.send({
         deviceToken: deviceToken,
         num: randomNum,
