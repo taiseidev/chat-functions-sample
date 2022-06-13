@@ -20,23 +20,18 @@ export const sendMessageSomeone = functions
       var randomNum = Math.floor(Math.random() * userList.length);
       console.log(randomNum);
       var deviceToken = userList[randomNum]["deviceToken"];
+      // bodyを指定してなかったからエラーになっていた。（こんくらい気付けよ...）
+      var data = request.body;
+      var senderId = data["senderId"];
+      await firestore.collection("user").doc(senderId).collection("send").add({
+        deviceToken: "fjldjfldjlfjdl",
+      });
 
-      var senderId = request["senderId"];
-      console.log(`deviceToken:${deviceToken}`);
-      await firestore
-        .collection("user")
-        .doc(senderId)
-        .collection("send")
-        .add({
-          deviceToken: deviceToken,
-        })
-        .then((value) => {
-          sendPushNotification(
-            deviceToken,
-            MESSAGE_TITLE,
-            `${senderId}さんと会話しよう💪`
-          );
-        });
+      sendPushNotification(
+        deviceToken,
+        MESSAGE_TITLE,
+        `fjldjfldjlfjdlさんと会話しよう💪`
+      );
       response.send({
         deviceToken: deviceToken,
         num: randomNum,
