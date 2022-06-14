@@ -1,3 +1,4 @@
+import 'package:chat_functions_app/presentation/pages/receive/receive_page.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -29,6 +30,12 @@ class SettingScreen extends StatelessWidget {
                     leading: const Icon(Icons.mark_email_unread_outlined),
                     title: const Text('受信'),
                     value: const Text(''),
+                    onPressed: (value) => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReceivePage(),
+                      ),
+                    ),
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.mark_email_read_outlined),
