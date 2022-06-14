@@ -1,3 +1,5 @@
+import 'package:chat_functions_app/data/service/firebase_analytics_service.dart';
+import 'package:chat_functions_app/data/service/navigator_service.dart';
 import 'package:chat_functions_app/firebase_options.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
@@ -5,10 +7,12 @@ import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:chat_functions_app/theme/positive_or_negative_button_style.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_it/get_it.dart';
 
 enum AuthorizationStatus {
   authorized,
@@ -18,7 +22,9 @@ enum AuthorizationStatus {
 }
 
 Future<void> _fcmBackgroundHandler(RemoteMessage message) async {
-  print("Handling a background message: ${message.messageId}");
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+  }
 }
 
 void main() async {
@@ -55,7 +61,14 @@ void main() async {
       sound: true,
     ),
   ]);
+  final locator = GetIt.instance;
 
+  void setupLocator() {
+    locator.registerLazySingleton(() => NavigationService());
+    locator.registerLazySingleton(() => AnalyticsService());
+  }
+
+  setupLocator();
   runApp(
     ProviderScope(
       overrides: [
@@ -80,6 +93,10 @@ class MyApp extends HookConsumerWidget {
     }, []);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // analyticsのオブザーバー
+      navigatorObservers: [
+        AnalyticsService.observer,
+      ],
       theme: ThemeData(
         textTheme: const TextTheme(
           bodyText2: TextStyle(
@@ -100,7 +117,7 @@ class MyApp extends HookConsumerWidget {
           ),
         ],
       ),
-      home: isLogined == true ? const HomePage() : const TopPage(),
+      home: isLogined == true ? const HomePage() : TopPage(),
     );
   }
 }

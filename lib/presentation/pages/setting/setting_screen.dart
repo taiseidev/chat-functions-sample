@@ -33,6 +33,8 @@ class SettingScreen extends StatelessWidget {
                     onPressed: (value) => Navigator.push(
                       context,
                       MaterialPageRoute(
+                        // analyticsに送信
+                        settings: const RouteSettings(name: '受信一覧画面へ遷移'),
                         builder: (context) => ChatNotificationPage(0),
                       ),
                     ),
@@ -44,6 +46,8 @@ class SettingScreen extends StatelessWidget {
                     onPressed: (value) => Navigator.push(
                       context,
                       MaterialPageRoute(
+                        // analyticsに送信
+                        settings: const RouteSettings(name: '送信一覧画面へ遷移'),
                         builder: (context) => ChatNotificationPage(1),
                       ),
                     ),

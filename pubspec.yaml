@@ -54,6 +54,8 @@ dependencies:
   fcm_config: ^3.3.5
   shared_preferences: ^2.0.15
   settings_ui: ^2.0.2
+  firebase_analytics: ^9.1.9
+  get_it: ^7.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

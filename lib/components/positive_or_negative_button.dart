@@ -16,7 +16,6 @@ class PositiveOrNegativeButton extends StatelessWidget {
     final defaultStyle =
         Theme.of(context).extension<PositiveOrNegativeButtonStyle>();
 
-    final radius = style?.radius ?? defaultStyle!.radius;
     final backgroundColor =
         style?.backgroundColor ?? defaultStyle!.backgroundColor;
     return ElevatedButton(
