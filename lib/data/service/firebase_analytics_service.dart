@@ -26,6 +26,7 @@ class AnalyticsService {
     required AnalyticsEvent event,
     required Map<String, dynamic> parameterMap,
   }) async {
+    // Enumクラス名.列挙IDの列挙IDのみを取得している。
     final eventName = event.toString().split('.')[1];
     analytics.logEvent(
       name: eventName,

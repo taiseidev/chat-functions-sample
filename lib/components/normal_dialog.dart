@@ -1,7 +1,9 @@
 import 'package:chat_functions_app/components/normal_button.dart';
+import 'package:chat_functions_app/data/service/firebase_analytics_service.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 
 class NormalDialog extends ConsumerWidget {
   const NormalDialog({Key? key}) : super(key: key);
@@ -15,6 +17,8 @@ class NormalDialog extends ConsumerWidget {
         NormalButton(
             title: '送信 🚀',
             onTap: () async {
+              final analyticsService = GetIt.I<AnalyticsService>();
+              analyticsService.sendButtonEvent(buttonName: '送信ボタン');
               // ref.read(isSendedProvider.notifier).state = 1;
               await ref.read(sendMessageForSomeoneViewModelProvider.future);
               // await Future.delayed(const Duration(seconds: 3)).then(

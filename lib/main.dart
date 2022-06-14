@@ -1,3 +1,5 @@
+import 'package:chat_functions_app/data/service/firebase_analytics_service.dart';
+import 'package:chat_functions_app/data/service/navigator_service.dart';
 import 'package:chat_functions_app/firebase_options.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_it/get_it.dart';
 
 enum AuthorizationStatus {
   authorized,
@@ -58,7 +61,14 @@ void main() async {
       sound: true,
     ),
   ]);
+  final locator = GetIt.instance;
 
+  void setupLocator() {
+    locator.registerLazySingleton(() => NavigationService());
+    locator.registerLazySingleton(() => AnalyticsService());
+  }
+
+  setupLocator();
   runApp(
     ProviderScope(
       overrides: [
@@ -83,6 +93,10 @@ class MyApp extends HookConsumerWidget {
     }, []);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // analyticsのオブザーバー
+      navigatorObservers: [
+        AnalyticsService.observer,
+      ],
       theme: ThemeData(
         textTheme: const TextTheme(
           bodyText2: TextStyle(
