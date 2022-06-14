@@ -12,12 +12,12 @@ _$_ChatNotificationModel _$$_ChatNotificationModelFromJson(
       name: json['name'] as String,
       deviceToken: json['deviceToken'] as String,
       isChatted: json['isChatted'] as bool,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: const TimestampDateTimeConverter()
+          .fromJson(json['createdAt'] as Timestamp?),
+      updatedAt: const TimestampDateTimeConverter()
+          .fromJson(json['updatedAt'] as Timestamp?),
+      deletedAt: const TimestampDateTimeConverter()
+          .fromJson(json['deletedAt'] as Timestamp?),
     );
 
 Map<String, dynamic> _$$_ChatNotificationModelToJson(
@@ -26,6 +26,10 @@ Map<String, dynamic> _$$_ChatNotificationModelToJson(
       'name': instance.name,
       'deviceToken': instance.deviceToken,
       'isChatted': instance.isChatted,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt':
+          const TimestampDateTimeConverter().toJson(instance.createdAt),
+      'updatedAt':
+          const TimestampDateTimeConverter().toJson(instance.updatedAt),
+      'deletedAt':
+          const TimestampDateTimeConverter().toJson(instance.deletedAt),
     };

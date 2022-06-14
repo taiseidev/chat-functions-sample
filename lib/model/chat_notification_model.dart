@@ -1,3 +1,5 @@
+import 'package:chat_functions_app/model/json_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -10,8 +12,9 @@ class ChatNotificationModel with _$ChatNotificationModel {
     required String name,
     required String deviceToken,
     required bool isChatted,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    @TimestampDateTimeConverter() DateTime? createdAt,
+    @TimestampDateTimeConverter() DateTime? updatedAt,
+    @TimestampDateTimeConverter() DateTime? deletedAt,
   }) = _ChatNotificationModel;
 
   factory ChatNotificationModel.fromJson(Map<String, dynamic> json) =>

@@ -24,8 +24,12 @@ mixin _$ChatNotificationModel {
   String get name => throw _privateConstructorUsedError;
   String get deviceToken => throw _privateConstructorUsedError;
   bool get isChatted => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +46,9 @@ abstract class $ChatNotificationModelCopyWith<$Res> {
       {String name,
       String deviceToken,
       bool isChatted,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @TimestampDateTimeConverter() DateTime? createdAt,
+      @TimestampDateTimeConverter() DateTime? updatedAt,
+      @TimestampDateTimeConverter() DateTime? deletedAt});
 }
 
 /// @nodoc
@@ -62,6 +67,7 @@ class _$ChatNotificationModelCopyWithImpl<$Res>
     Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -84,6 +90,10 @@ class _$ChatNotificationModelCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      deletedAt: deletedAt == freezed
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -99,8 +109,9 @@ abstract class _$$_ChatNotificationModelCopyWith<$Res>
       {String name,
       String deviceToken,
       bool isChatted,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @TimestampDateTimeConverter() DateTime? createdAt,
+      @TimestampDateTimeConverter() DateTime? updatedAt,
+      @TimestampDateTimeConverter() DateTime? deletedAt});
 }
 
 /// @nodoc
@@ -122,6 +133,7 @@ class __$$_ChatNotificationModelCopyWithImpl<$Res>
     Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? deletedAt = freezed,
   }) {
     return _then(_$_ChatNotificationModel(
       name: name == freezed
@@ -144,6 +156,10 @@ class __$$_ChatNotificationModelCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      deletedAt: deletedAt == freezed
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -157,8 +173,9 @@ class _$_ChatNotificationModel
       {required this.name,
       required this.deviceToken,
       required this.isChatted,
-      this.createdAt,
-      this.updatedAt});
+      @TimestampDateTimeConverter() this.createdAt,
+      @TimestampDateTimeConverter() this.updatedAt,
+      @TimestampDateTimeConverter() this.deletedAt});
 
   factory _$_ChatNotificationModel.fromJson(Map<String, dynamic> json) =>
       _$$_ChatNotificationModelFromJson(json);
@@ -170,13 +187,18 @@ class _$_ChatNotificationModel
   @override
   final bool isChatted;
   @override
+  @TimestampDateTimeConverter()
   final DateTime? createdAt;
   @override
+  @TimestampDateTimeConverter()
   final DateTime? updatedAt;
+  @override
+  @TimestampDateTimeConverter()
+  final DateTime? deletedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChatNotificationModel(name: $name, deviceToken: $deviceToken, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ChatNotificationModel(name: $name, deviceToken: $deviceToken, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -188,7 +210,8 @@ class _$_ChatNotificationModel
       ..add(DiagnosticsProperty('deviceToken', deviceToken))
       ..add(DiagnosticsProperty('isChatted', isChatted))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('deletedAt', deletedAt));
   }
 
   @override
@@ -201,7 +224,8 @@ class _$_ChatNotificationModel
                 .equals(other.deviceToken, deviceToken) &&
             const DeepCollectionEquality().equals(other.isChatted, isChatted) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.deletedAt, deletedAt));
   }
 
   @JsonKey(ignore: true)
@@ -212,7 +236,8 @@ class _$_ChatNotificationModel
       const DeepCollectionEquality().hash(deviceToken),
       const DeepCollectionEquality().hash(isChatted),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+      const DeepCollectionEquality().hash(updatedAt),
+      const DeepCollectionEquality().hash(deletedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -228,11 +253,13 @@ class _$_ChatNotificationModel
 
 abstract class _ChatNotificationModel implements ChatNotificationModel {
   const factory _ChatNotificationModel(
-      {required final String name,
-      required final String deviceToken,
-      required final bool isChatted,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_ChatNotificationModel;
+          {required final String name,
+          required final String deviceToken,
+          required final bool isChatted,
+          @TimestampDateTimeConverter() final DateTime? createdAt,
+          @TimestampDateTimeConverter() final DateTime? updatedAt,
+          @TimestampDateTimeConverter() final DateTime? deletedAt}) =
+      _$_ChatNotificationModel;
 
   factory _ChatNotificationModel.fromJson(Map<String, dynamic> json) =
       _$_ChatNotificationModel.fromJson;
@@ -244,9 +271,14 @@ abstract class _ChatNotificationModel implements ChatNotificationModel {
   @override
   bool get isChatted => throw _privateConstructorUsedError;
   @override
+  @TimestampDateTimeConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
+  @TimestampDateTimeConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @override
+  @TimestampDateTimeConverter()
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_ChatNotificationModelCopyWith<_$_ChatNotificationModel> get copyWith =>
