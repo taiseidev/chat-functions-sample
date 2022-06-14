@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseUtil {
-  static Future<String> getCurrentUserUid() async {
+  static String getCurrentUserUid() {
     return FirebaseAuth.instance.currentUser!.uid;
   }
 }
