@@ -1,8 +1,5 @@
 import 'package:chat_functions_app/components/normal_button.dart';
-import 'package:chat_functions_app/components/positive_or_negative_button.dart';
-import 'package:chat_functions_app/theme/positive_or_negative_button_style.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,8 +9,8 @@ class NormalDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
-      title: Text('誰かにチャット依頼を送信しますか？'),
-      content: Text('相手が許可するとチャットルームが開かれます📩'),
+      title: const Text('誰かにチャット依頼を送信しますか？'),
+      content: const Text('相手が許可するとチャットルームが開かれます📩'),
       actions: <Widget>[
         NormalButton(
             title: '送信 🚀',

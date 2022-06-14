@@ -14,6 +14,7 @@ class HomePage extends HookConsumerWidget {
     useEffect(() {
       final loginState = ref.read(sharedPreferencesProvider);
       loginState.setBool('loginState', true);
+      return null;
     }, []);
     return const Scaffold(
       body: HomePageBody(),

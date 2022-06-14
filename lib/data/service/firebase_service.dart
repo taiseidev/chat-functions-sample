@@ -3,6 +3,7 @@ import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
@@ -24,7 +25,9 @@ class FirebaseService {
         'updatedAt': DateTime.now(),
       });
     } on FirebaseException catch (err) {
-      print(err);
+      if (kDebugMode) {
+        print(err);
+      }
     }
   }
 }
@@ -36,7 +39,9 @@ final registerAnonymouslyUserProvider =
     FutureProvider<UserCredential>((_) async {
   final auth = FirebaseAuth.instance;
   final result = await auth.signInAnonymously();
-  print(result.user!.uid.toString());
+  if (kDebugMode) {
+    print(result.user!.uid.toString());
+  }
   return result;
 });
 // Firestoreにユーザーを登録

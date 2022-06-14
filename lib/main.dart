@@ -5,6 +5,7 @@ import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:chat_functions_app/theme/positive_or_negative_button_style.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,7 +19,9 @@ enum AuthorizationStatus {
 }
 
 Future<void> _fcmBackgroundHandler(RemoteMessage message) async {
-  print("Handling a background message: ${message.messageId}");
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+  }
 }
 
 void main() async {
