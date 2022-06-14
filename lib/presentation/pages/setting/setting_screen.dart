@@ -33,7 +33,7 @@ class SettingScreen extends StatelessWidget {
                     onPressed: (value) => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ReceivePage(),
+                        builder: (context) => ReceivePage(0),
                       ),
                     ),
                   ),
@@ -41,6 +41,12 @@ class SettingScreen extends StatelessWidget {
                     leading: const Icon(Icons.mark_email_read_outlined),
                     title: const Text('送信'),
                     value: const Text(''),
+                    onPressed: (value) => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReceivePage(1),
+                      ),
+                    ),
                   ),
                 ],
               ),

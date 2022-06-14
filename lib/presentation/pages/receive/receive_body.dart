@@ -1,10 +1,40 @@
+import 'package:chat_functions_app/viewModel/receive_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ReceiveBody extends ConsumerWidget {
+class ReceiveBody extends HookConsumerWidget {
+  ReceiveBody(this.type, {Key? key}) : super(key: key);
+  int type;
+  late String collectionName;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    return
+    useEffect(() {
+      if (type == 0) {
+        collectionName = 'receive';
+      } else {
+        collectionName = 'send';
+      }
+    }, []);
+    final snapshot = ref.watch(receiveNotificationProvider(collectionName));
+    return snapshot.when(
+        loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+        error: (error, stack) => Center(
+              child: Text('Error: $error'),
+            ),
+        data: (snapshot) {
+          return ListView.builder(
+              itemCount: snapshot.length,
+              itemBuilder: (context, index) {
+                final data = snapshot[index];
+                return Card(
+                  child: ListTile(
+                    title: Text(data.name),
+                  ),
+                );
+              });
+        });
   }
 }

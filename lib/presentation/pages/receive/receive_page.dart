@@ -3,14 +3,17 @@ import 'package:chat_functions_app/presentation/pages/receive/receive_header.dar
 import 'package:flutter/material.dart';
 
 class ReceivePage extends StatelessWidget {
+  ReceivePage(this.type, {Key? key}) : super(key: key);
+  int type;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(70, 70),
-        child: ReceiveHeader(),
+        child: ReceiveHeader(type),
       ),
-      body: ReceiveBody(),
+      body: ReceiveBody(type),
     );
   }
 }

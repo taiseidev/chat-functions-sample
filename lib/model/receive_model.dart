@@ -8,10 +8,10 @@ part 'receive_model.g.dart';
 class ReceiveModel with _$ReceiveModel {
   const factory ReceiveModel({
     required String name,
-    required String deveiceToken,
+    required String deviceToken,
     required bool isChatted,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _ReceiveModel;
 
   factory ReceiveModel.fromJson(Map<String, dynamic> json) =>

@@ -21,10 +21,10 @@ ReceiveModel _$ReceiveModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ReceiveModel {
   String get name => throw _privateConstructorUsedError;
-  String get deveiceToken => throw _privateConstructorUsedError;
+  String get deviceToken => throw _privateConstructorUsedError;
   bool get isChatted => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,10 +39,10 @@ abstract class $ReceiveModelCopyWith<$Res> {
       _$ReceiveModelCopyWithImpl<$Res>;
   $Res call(
       {String name,
-      String deveiceToken,
+      String deviceToken,
       bool isChatted,
-      DateTime createdAt,
-      DateTime updatedAt});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$ReceiveModelCopyWithImpl<$Res> implements $ReceiveModelCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
-    Object? deveiceToken = freezed,
+    Object? deviceToken = freezed,
     Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -66,9 +66,9 @@ class _$ReceiveModelCopyWithImpl<$Res> implements $ReceiveModelCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      deveiceToken: deveiceToken == freezed
-          ? _value.deveiceToken
-          : deveiceToken // ignore: cast_nullable_to_non_nullable
+      deviceToken: deviceToken == freezed
+          ? _value.deviceToken
+          : deviceToken // ignore: cast_nullable_to_non_nullable
               as String,
       isChatted: isChatted == freezed
           ? _value.isChatted
@@ -77,11 +77,11 @@ class _$ReceiveModelCopyWithImpl<$Res> implements $ReceiveModelCopyWith<$Res> {
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -95,10 +95,10 @@ abstract class _$$_ReceiveModelCopyWith<$Res>
   @override
   $Res call(
       {String name,
-      String deveiceToken,
+      String deviceToken,
       bool isChatted,
-      DateTime createdAt,
-      DateTime updatedAt});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -115,7 +115,7 @@ class __$$_ReceiveModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? deveiceToken = freezed,
+    Object? deviceToken = freezed,
     Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -125,9 +125,9 @@ class __$$_ReceiveModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      deveiceToken: deveiceToken == freezed
-          ? _value.deveiceToken
-          : deveiceToken // ignore: cast_nullable_to_non_nullable
+      deviceToken: deviceToken == freezed
+          ? _value.deviceToken
+          : deviceToken // ignore: cast_nullable_to_non_nullable
               as String,
       isChatted: isChatted == freezed
           ? _value.isChatted
@@ -136,11 +136,11 @@ class __$$_ReceiveModelCopyWithImpl<$Res>
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -150,10 +150,10 @@ class __$$_ReceiveModelCopyWithImpl<$Res>
 class _$_ReceiveModel with DiagnosticableTreeMixin implements _ReceiveModel {
   const _$_ReceiveModel(
       {required this.name,
-      required this.deveiceToken,
+      required this.deviceToken,
       required this.isChatted,
-      required this.createdAt,
-      required this.updatedAt});
+      this.createdAt,
+      this.updatedAt});
 
   factory _$_ReceiveModel.fromJson(Map<String, dynamic> json) =>
       _$$_ReceiveModelFromJson(json);
@@ -161,17 +161,17 @@ class _$_ReceiveModel with DiagnosticableTreeMixin implements _ReceiveModel {
   @override
   final String name;
   @override
-  final String deveiceToken;
+  final String deviceToken;
   @override
   final bool isChatted;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ReceiveModel(name: $name, deveiceToken: $deveiceToken, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ReceiveModel(name: $name, deviceToken: $deviceToken, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -180,7 +180,7 @@ class _$_ReceiveModel with DiagnosticableTreeMixin implements _ReceiveModel {
     properties
       ..add(DiagnosticsProperty('type', 'ReceiveModel'))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('deveiceToken', deveiceToken))
+      ..add(DiagnosticsProperty('deviceToken', deviceToken))
       ..add(DiagnosticsProperty('isChatted', isChatted))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt));
@@ -193,7 +193,7 @@ class _$_ReceiveModel with DiagnosticableTreeMixin implements _ReceiveModel {
             other is _$_ReceiveModel &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
-                .equals(other.deveiceToken, deveiceToken) &&
+                .equals(other.deviceToken, deviceToken) &&
             const DeepCollectionEquality().equals(other.isChatted, isChatted) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
@@ -204,7 +204,7 @@ class _$_ReceiveModel with DiagnosticableTreeMixin implements _ReceiveModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(deveiceToken),
+      const DeepCollectionEquality().hash(deviceToken),
       const DeepCollectionEquality().hash(isChatted),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt));
@@ -223,10 +223,10 @@ class _$_ReceiveModel with DiagnosticableTreeMixin implements _ReceiveModel {
 abstract class _ReceiveModel implements ReceiveModel {
   const factory _ReceiveModel(
       {required final String name,
-      required final String deveiceToken,
+      required final String deviceToken,
       required final bool isChatted,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$_ReceiveModel;
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$_ReceiveModel;
 
   factory _ReceiveModel.fromJson(Map<String, dynamic> json) =
       _$_ReceiveModel.fromJson;
@@ -234,13 +234,13 @@ abstract class _ReceiveModel implements ReceiveModel {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  String get deveiceToken => throw _privateConstructorUsedError;
+  String get deviceToken => throw _privateConstructorUsedError;
   @override
   bool get isChatted => throw _privateConstructorUsedError;
   @override
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_ReceiveModelCopyWith<_$_ReceiveModel> get copyWith =>

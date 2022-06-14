@@ -62,11 +62,13 @@ final chatMessageProvider = StreamProvider((_) {
           .toList());
 });
 
-final receiveNotificationDataProvider = StreamProvider((_) {
+// 送受信を受け取る
+final receiveNotificationDataProvider =
+    StreamProvider.family.autoDispose((_, value) {
   final collection = _db
       .collection('user')
       .doc(FirebaseUtil.getCurrentUserUid())
-      .collection('receive');
+      .collection('$value');
   final stream = collection.snapshots().map(
         (e) => e.docs
             .map(
