@@ -1,4 +1,4 @@
-import 'package:chat_functions_app/presentation/pages/receive/receive_page.dart';
+import 'package:chat_functions_app/presentation/pages/chat_notification/chat_notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -33,7 +33,7 @@ class SettingScreen extends StatelessWidget {
                     onPressed: (value) => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ReceivePage(0),
+                        builder: (context) => ChatNotificationPage(0),
                       ),
                     ),
                   ),
@@ -44,7 +44,7 @@ class SettingScreen extends StatelessWidget {
                     onPressed: (value) => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ReceivePage(1),
+                        builder: (context) => ChatNotificationPage(1),
                       ),
                     ),
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ReceiveHeader extends StatelessWidget {
-  const ReceiveHeader(this.type, {Key? key}) : super(key: key);
+class ChatNotificationHeader extends StatelessWidget {
+  const ChatNotificationHeader(this.type, {Key? key}) : super(key: key);
   final int type;
   @override
   Widget build(BuildContext context) {
