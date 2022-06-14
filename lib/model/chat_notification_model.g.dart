@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'receive_model.dart';
+part of 'chat_notification_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReceiveModel _$$_ReceiveModelFromJson(Map<String, dynamic> json) =>
-    _$_ReceiveModel(
+_$_ChatNotificationModel _$$_ChatNotificationModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_ChatNotificationModel(
       name: json['name'] as String,
       deviceToken: json['deviceToken'] as String,
       isChatted: json['isChatted'] as bool,
@@ -19,7 +20,8 @@ _$_ReceiveModel _$$_ReceiveModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$_ReceiveModelToJson(_$_ReceiveModel instance) =>
+Map<String, dynamic> _$$_ChatNotificationModelToJson(
+        _$_ChatNotificationModel instance) =>
     <String, dynamic>{
       'name': instance.name,
       'deviceToken': instance.deviceToken,

@@ -1,4 +1,4 @@
-import 'package:chat_functions_app/model/receive_model.dart';
+import 'package:chat_functions_app/model/chat_notification_model.dart';
 import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -63,7 +63,7 @@ final chatMessageProvider = StreamProvider((_) {
 });
 
 // 送受信を受け取る
-final receiveNotificationDataProvider =
+final chatNotificationDataProvider =
     StreamProvider.family.autoDispose((_, value) {
   final collection = _db
       .collection('user')
@@ -72,7 +72,7 @@ final receiveNotificationDataProvider =
   final stream = collection.snapshots().map(
         (e) => e.docs
             .map(
-              (e) => ReceiveModel.fromJson(e.data()),
+              (e) => ChatNotificationModel.fromJson(e.data()),
             )
             .toList(),
       );

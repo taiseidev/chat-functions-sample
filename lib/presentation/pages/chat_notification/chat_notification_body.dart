@@ -1,10 +1,10 @@
-import 'package:chat_functions_app/viewModel/receive_view_model.dart';
+import 'package:chat_functions_app/viewModel/chat_notification_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ReceiveBody extends HookConsumerWidget {
-  ReceiveBody(this.type, {Key? key}) : super(key: key);
+class ChatNotificationBody extends HookConsumerWidget {
+  ChatNotificationBody(this.type, {Key? key}) : super(key: key);
   int type;
   late String collectionName;
   @override
@@ -16,7 +16,7 @@ class ReceiveBody extends HookConsumerWidget {
         collectionName = 'send';
       }
     }, []);
-    final snapshot = ref.watch(receiveNotificationProvider(collectionName));
+    final snapshot = ref.watch(chatNotificationProvider(collectionName));
     return snapshot.when(
         loading: () => const Center(
               child: CircularProgressIndicator(),
