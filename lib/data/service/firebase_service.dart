@@ -1,3 +1,5 @@
+import 'package:chat_functions_app/model/receive_model.dart';
+import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -58,4 +60,19 @@ final chatMessageProvider = StreamProvider((_) {
             (doc) => types.Message.fromJson(doc.data()),
           )
           .toList());
+});
+
+final receiveNotificationDataProvider = StreamProvider((_) {
+  final collection = _db
+      .collection('user')
+      .doc(FirebaseUtil.getCurrentUserUid())
+      .collection('receive');
+  final stream = collection.snapshots().map(
+        (e) => e.docs
+            .map(
+              (e) => ReceiveModel.fromJson(e.data()),
+            )
+            .toList(),
+      );
+  return stream;
 });
