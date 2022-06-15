@@ -17,14 +17,16 @@ export const sendMessageSomeone = functions
     }
     const userSnapShot = await firestore.collection("user").get();
     const userList = userSnapShot.docs.map((doc) => doc.data());
-    var randomNum = Math.floor(Math.random() * userList.length);
-    var receiverId = userList[randomNum]["id"];
-    var receiverName = userList[randomNum]["name"];
-    var receiverDeviceToken = userList[randomNum]["deviceToken"];
     var data = request.body;
     var senderId = data["senderId"];
     var senderName = data["name"];
     var senderDeviceToken = data["deviceToken"];
+    // 本人に送信しないようにフィルター
+    userList.filter((user) => user["id"].match(!senderId));
+    var randomNum = Math.floor(Math.random() * userList.length);
+    var receiverId = userList[randomNum]["id"];
+    var receiverName = userList[randomNum]["name"];
+    var receiverDeviceToken = userList[randomNum]["deviceToken"];
 
     try {
       // add receiverInfo for sender collection
