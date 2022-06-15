@@ -9,7 +9,7 @@ class TopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FCMNotificationListener(
       onNotification: (RemoteMessage notification, void Function() setState) {},
-      child: const Scaffold(
+      child: Scaffold(
         body: TopPageBody(),
       ),
     );

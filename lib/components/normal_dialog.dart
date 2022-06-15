@@ -17,6 +17,7 @@ class NormalDialog extends ConsumerWidget {
         NormalButton(
             title: '送信 🚀',
             onTap: () async {
+              Navigator.pop(context);
               final analyticsService = GetIt.I<AnalyticsService>();
               analyticsService.sendButtonEvent(buttonName: '送信ボタンを押下');
               // ref.read(isSendedProvider.notifier).state = 1;
