@@ -117,7 +117,7 @@ class MyApp extends HookConsumerWidget {
           ),
         ],
       ),
-      home: isLogined == true ? const HomePage() : TopPage(),
+      home: const TopPage(),
     );
   }
 }
