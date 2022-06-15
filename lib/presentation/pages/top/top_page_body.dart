@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/viewModel/top_view_model.dart';
@@ -9,37 +11,74 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TopPageBody extends ConsumerWidget {
-  const TopPageBody({Key? key}) : super(key: key);
+  TopPageBody({Key? key}) : super(key: key);
+  final controller = TextEditingController();
 
-  Future<void> phoneFunction() async {
-    final auth = FirebaseAuth.instance;
-    await auth.verifyPhoneNumber(
-      phoneNumber: '+81 090 9209 6513',
-      verificationCompleted: (PhoneAuthCredential credential) {
-        // androidのみ実装
+  Future<String> phoneFunction(String phoneNumber, BuildContext context) {
+    final completer = Completer<String>();
+    final _firebaseAuth = FirebaseAuth.instance;
+
+    _firebaseAuth.verifyPhoneNumber(
+      phoneNumber: '+81 90 9209 6513',
+      timeout: const Duration(seconds: 30),
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        UserCredential authresult =
+            await _firebaseAuth.signInWithCredential(credential);
+
+        User user = authresult.user!;
+        // _getUserFromFirebase(user);
+        completer.complete("signedUp");
       },
       verificationFailed: (FirebaseAuthException e) {
-        if (e.code == 'invalid-phone-number') {
-          print('invalid phone number');
-        }
+        print(e.toString());
+        print('エラー');
+        String error = e.code == 'invalid-phone-number'
+            ? "Invalid number. Enter again."
+            : "Can Not Login Now. Please try again.";
+        completer.complete(error);
       },
-      codeSent: (String verificationId, int? resendToken) async {
-        // Update the UI - wait for the user to enter the SMS code
-        String smsCode = '0000';
-
+      codeSent: (verificationId, resendToken) async {
+        final result = await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) {
+            return AlertDialog(
+              title: Text("This is the title"),
+              content: Text("This is the content"),
+              actions: [
+                TextFormField(
+                  controller: controller,
+                  onChanged: (value) {
+                    controller.text = value;
+                  },
+                ),
+                ElevatedButton(
+                  child: Text("OK"),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            );
+          },
+        );
         // Create a PhoneAuthCredential with the code
         PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: verificationId,
-          smsCode: smsCode,
-        );
+            verificationId: verificationId, smsCode: controller.text);
 
         // Sign the user in (or link) with the credential
-        await auth.signInWithCredential(credential);
+        await _firebaseAuth
+            .signInWithCredential(credential)
+            .then((value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                )));
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        print(verificationId);
+        completer.complete("timeout");
       },
     );
+
+    return completer.future;
   }
 
   @override
@@ -62,7 +101,7 @@ class TopPageBody extends ConsumerWidget {
           //   },
           // ),
           ElevatedButton(
-            onPressed: () => phoneFunction(),
+            onPressed: () => phoneFunction('09092096513', context),
             child: Text('送信'),
           ),
         ],
