@@ -95,6 +95,9 @@ class TopPageBody extends ConsumerWidget {
         children: [
           const Text(
             'Who..Chat?',
+            style: TextStyle(
+              color: Color.fromARGB(255, 16, 62, 101),
+            ),
           ),
           const SizedBox(
             height: 48,
