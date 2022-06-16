@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 
 import 'package:chat_functions_app/components/normal_button.dart';
@@ -89,69 +87,72 @@ class TopPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Who..Chat?',
-            style: TextStyle(
-              color: Color.fromARGB(255, 16, 62, 101),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Who..Chat?',
+              style: TextStyle(
+                color: Color.fromARGB(255, 16, 62, 101),
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 48,
-          ),
-          Form(
-            key: _phoneKey,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-              child: TextFormField(
-                keyboardType: TextInputType.phone,
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '電話番号を入力してください';
-                  }
-                  if (value.length != 11) {
-                    return '形式が違います';
-                  }
-                  return null;
-                },
-                controller: phoneController,
-                decoration: InputDecoration(
-                  labelText: '電話番号',
-                  labelStyle: const TextStyle(color: Colors.black),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
+            const SizedBox(
+              height: 48,
+            ),
+            Form(
+              key: _phoneKey,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                child: TextFormField(
+                  keyboardType: TextInputType.phone,
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '電話番号を入力してください';
+                    }
+                    if (value.length != 11) {
+                      return '形式が違います';
+                    }
+                    return null;
+                  },
+                  controller: phoneController,
+                  decoration: InputDecoration(
+                    labelText: '電話番号',
+                    labelStyle: const TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  floatingLabelStyle: const TextStyle(fontSize: 12),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
+                    floatingLabelStyle: const TextStyle(fontSize: 12),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          NormalButton(
-            title: '会員登録',
-            onTap: () {
-              if (_phoneKey.currentState!.validate()) {
-                phoneFunction(phoneController.text, context);
-              }
-            },
-          )
-        ],
+            const SizedBox(
+              height: 24,
+            ),
+            NormalButton(
+              title: '会員登録',
+              onTap: () {
+                if (_phoneKey.currentState!.validate()) {
+                  phoneFunction(phoneController.text, context);
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }
