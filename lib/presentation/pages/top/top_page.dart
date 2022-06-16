@@ -10,6 +10,7 @@ class TopPage extends StatelessWidget {
     return FCMNotificationListener(
       onNotification: (RemoteMessage notification, void Function() setState) {},
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: TopPageBody(),
       ),
     );

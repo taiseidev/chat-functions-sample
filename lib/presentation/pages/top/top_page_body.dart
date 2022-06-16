@@ -4,27 +4,25 @@ import 'dart:async';
 
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
-import 'package:chat_functions_app/viewModel/top_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class TopPageBody extends ConsumerWidget {
   TopPageBody({Key? key}) : super(key: key);
-  final controller = TextEditingController();
+  final smsCodeController = TextEditingController();
+  final phoneController = TextEditingController();
 
   Future<String> phoneFunction(String phoneNumber, BuildContext context) {
     final completer = Completer<String>();
-    final _firebaseAuth = FirebaseAuth.instance;
+    final auth = FirebaseAuth.instance;
 
-    _firebaseAuth.verifyPhoneNumber(
-      phoneNumber: '+81 90 9209 6513',
+    auth.verifyPhoneNumber(
+      phoneNumber: '+81${phoneController.text}',
       timeout: const Duration(seconds: 30),
       verificationCompleted: (PhoneAuthCredential credential) async {
-        UserCredential authresult =
-            await _firebaseAuth.signInWithCredential(credential);
+        UserCredential authresult = await auth.signInWithCredential(credential);
 
         User user = authresult.user!;
         // _getUserFromFirebase(user);
@@ -32,7 +30,6 @@ class TopPageBody extends ConsumerWidget {
       },
       verificationFailed: (FirebaseAuthException e) {
         print(e.toString());
-        print('エラー');
         String error = e.code == 'invalid-phone-number'
             ? "Invalid number. Enter again."
             : "Can Not Login Now. Please try again.";
@@ -44,40 +41,42 @@ class TopPageBody extends ConsumerWidget {
           barrierDismissible: false,
           builder: (_) {
             return AlertDialog(
-              title: Text("This is the title"),
-              content: Text("This is the content"),
+              title: Text("認証コードを入力"),
+              content: Text("SMSにて認証コードを送信しました🚀"),
               actions: [
                 PinCodeTextField(
-                  controller: controller,
+                  controller: smsCodeController,
+                  autoFocus: true,
                   length: 6,
                   obscureText: false,
                   animationType: AnimationType.fade,
-                  animationDuration: Duration(milliseconds: 300),
-                  onChanged: (value) {
-                    controller.text = value;
-                  },
+                  animationDuration: const Duration(milliseconds: 300),
                   appContext: context,
+                  onChanged: (String value) {},
                 ),
-                ElevatedButton(
-                  child: Text("OK"),
-                  onPressed: () => Navigator.pop(context),
+                NormalButton(
+                  title: '認証',
+                  onTap: () => Navigator.pop(context, true),
                 ),
               ],
             );
           },
         );
-        // Create a PhoneAuthCredential with the code
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(
-            verificationId: verificationId, smsCode: controller.text);
+        if (result == true) {
+          // Create a PhoneAuthCredential with the code
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: verificationId, smsCode: smsCodeController.text);
 
-        // Sign the user in (or link) with the credential
-        await _firebaseAuth
-            .signInWithCredential(credential)
-            .then((value) => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                )));
+          // Sign the user in (or link) with the credential
+          await auth.signInWithCredential(credential).then(
+                (value) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
+                ),
+              );
+        }
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         completer.complete("timeout");
@@ -94,22 +93,42 @@ class TopPageBody extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Who...?',
+            'Who..Chat?',
           ),
           const SizedBox(
             height: 80,
           ),
-          // TextFormField(
-          //   controller: controller,
-          //   keyboardType: TextInputType.phone,
-          //   onChanged: (String value) {
-          //     controller.text = value;
-          //   },
-          // ),
-          ElevatedButton(
-            onPressed: () => phoneFunction('09092096513', context),
-            child: Text('送信'),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+            child: TextFormField(
+              controller: phoneController,
+              decoration: InputDecoration(
+                labelText: '電話番号',
+                labelStyle: const TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                  ),
+                ),
+                floatingLabelStyle: const TextStyle(fontSize: 12),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                ),
+              ),
+            ),
           ),
+          const SizedBox(
+            height: 24,
+          ),
+          NormalButton(
+            title: '会員登録',
+            onTap: () => phoneFunction(phoneController.text, context),
+          )
         ],
       ),
     );
