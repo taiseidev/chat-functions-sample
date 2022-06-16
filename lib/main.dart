@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:roggle/roggle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get_it/get_it.dart';
 
@@ -63,6 +64,7 @@ void main() async {
   final locator = GetIt.instance;
 
   void setupLocator() {
+    locator.registerLazySingleton(() => Roggle());
     locator.registerLazySingleton(() => NavigationService());
     locator.registerLazySingleton(() => AnalyticsService());
   }
