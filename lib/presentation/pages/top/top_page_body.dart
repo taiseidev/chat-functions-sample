@@ -13,6 +13,7 @@ class TopPageBody extends ConsumerWidget {
   TopPageBody({Key? key}) : super(key: key);
   final smsCodeController = TextEditingController();
   final phoneController = TextEditingController();
+  final _phoneKey = GlobalKey<FormState>();
 
   Future<String> phoneFunction(String phoneNumber, BuildContext context) {
     final completer = Completer<String>();
@@ -96,27 +97,41 @@ class TopPageBody extends ConsumerWidget {
             'Who..Chat?',
           ),
           const SizedBox(
-            height: 80,
+            height: 48,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-            child: TextFormField(
-              controller: phoneController,
-              decoration: InputDecoration(
-                labelText: '電話番号',
-                labelStyle: const TextStyle(color: Colors.black),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Colors.black,
+          Form(
+            key: _phoneKey,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '電話番号を入力してください';
+                  }
+                  if (value.length != 11) {
+                    return '形式が違います';
+                  }
+                  return null;
+                },
+                controller: phoneController,
+                decoration: InputDecoration(
+                  labelText: '電話番号',
+                  labelStyle: const TextStyle(color: Colors.black),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                floatingLabelStyle: const TextStyle(fontSize: 12),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Colors.black,
-                    width: 1.0,
+                  floatingLabelStyle: const TextStyle(fontSize: 12),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
                   ),
                 ),
               ),
@@ -127,7 +142,11 @@ class TopPageBody extends ConsumerWidget {
           ),
           NormalButton(
             title: '会員登録',
-            onTap: () => phoneFunction(phoneController.text, context),
+            onTap: () {
+              if (_phoneKey.currentState!.validate()) {
+                phoneFunction(phoneController.text, context);
+              }
+            },
           )
         ],
       ),
