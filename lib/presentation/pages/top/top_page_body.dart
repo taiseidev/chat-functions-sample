@@ -153,21 +153,3 @@ class TopPageBody extends ConsumerWidget {
     );
   }
 }
-
-
-
-          // 匿名認証のボタン
-          // NormalButton(
-          //   title: 'はじめる',
-          //   onTap: () async {
-          //     final result = await ref.read(registerUserProvider.future);
-          //     if (result) {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => const HomePage(),
-          //         ),
-          //       );
-          //     }
-          //   },
-          // ),
