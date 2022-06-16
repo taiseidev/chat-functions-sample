@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 
 import 'package:chat_functions_app/components/normal_button.dart';
