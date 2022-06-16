@@ -5,7 +5,9 @@ import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:roggle/roggle.dart';
 
 class TopPageBody extends ConsumerWidget {
   TopPageBody({Key? key}) : super(key: key);
@@ -146,6 +148,9 @@ class TopPageBody extends ConsumerWidget {
             NormalButton(
               title: '会員登録',
               onTap: () {
+                final roggle = GetIt.I<Roggle>();
+                roggle.v('first roggle');
+                roggle.wtf('first roggle');
                 if (_phoneKey.currentState!.validate()) {
                   phoneFunction(phoneController.text, context);
                 }
