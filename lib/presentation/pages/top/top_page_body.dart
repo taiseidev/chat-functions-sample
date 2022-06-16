@@ -95,6 +95,9 @@ class TopPageBody extends ConsumerWidget {
         children: [
           const Text(
             'Who..Chat?',
+            style: TextStyle(
+              color: Color.fromARGB(255, 16, 62, 101),
+            ),
           ),
           const SizedBox(
             height: 48,
@@ -153,21 +156,3 @@ class TopPageBody extends ConsumerWidget {
     );
   }
 }
-
-
-
-          // 匿名認証のボタン
-          // NormalButton(
-          //   title: 'はじめる',
-          //   onTap: () async {
-          //     final result = await ref.read(registerUserProvider.future);
-          //     if (result) {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => const HomePage(),
-          //         ),
-          //       );
-          //     }
-          //   },
-          // ),
