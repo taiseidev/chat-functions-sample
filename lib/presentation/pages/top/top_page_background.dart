@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TopPageBackGround extends StatelessWidget {
+  const TopPageBackGround({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -15,10 +17,10 @@ class TopPageBackGround extends StatelessWidget {
               color: Colors.grey[300],
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.question_mark,
               size: 80,
-              color: Color.fromARGB(255, 16, 62, 101),
+              color:  Color.fromARGB(255, 16, 62, 101),
             ),
           ),
         ),
@@ -32,10 +34,10 @@ class TopPageBackGround extends StatelessWidget {
               color: Colors.grey[300],
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.question_mark,
               size: 80,
-              color: Color.fromARGB(255, 16, 62, 101),
+              color:  Color.fromARGB(255, 16, 62, 101),
             ),
           ),
         ),
@@ -61,10 +63,10 @@ class TopPageBackGround extends StatelessWidget {
               color: Colors.grey[300],
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.question_mark,
               size: 80,
-              color: Color.fromARGB(255, 16, 62, 101),
+              color: const Color.fromARGB(255, 16, 62, 101),
             ),
           ),
         ),
