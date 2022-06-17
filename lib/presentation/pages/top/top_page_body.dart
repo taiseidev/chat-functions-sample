@@ -15,7 +15,7 @@ class TopPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(
-      dialogStateProvider,
+      phoneAuthProvider,
       (previous, next) async {
         if (next == true) {
           // ダイアログを発火
@@ -45,11 +45,11 @@ class TopPageBody extends ConsumerWidget {
               );
             },
           );
+
           if (result) {
-            ref
-                .watch(dialogStateProvider.notifier)
-                .update((state) => state = false);
-            print('発火OK');
+            await ref
+                .read(phoneAuthProvider.notifier)
+                .registerUser(smsCodeController.text);
           }
         }
       },
@@ -115,9 +115,9 @@ class TopPageBody extends ConsumerWidget {
               onTap: () async {
                 if (_phoneKey.currentState!.validate()) {
                   print('バリデーションチェックOK');
-                  await ref.read(
-                      phoneNumberVerificationProvider(phoneController.text)
-                          .future);
+                  await ref
+                      .read(phoneAuthProvider.notifier)
+                      .sendVerifyCode(phoneController.text);
                 }
               },
             )

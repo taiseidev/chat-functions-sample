@@ -1,14 +1,9 @@
 import 'dart:async';
 
-import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/data/service/firebase_service.dart';
-import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 final registerUserProvider = FutureProvider<bool>((ref) async {
   try {
@@ -24,42 +19,38 @@ final registerUserProvider = FutureProvider<bool>((ref) async {
   }
 });
 
-// TODO:Refactor
-final phoneNumberVerificationProvider =
-    FutureProvider.family((ref, phone) async {
-  final completer = Completer<String>();
+final phoneAuthProvider = StateNotifierProvider<PhoneAuthStateNotifier, bool>(
+    (ref) => PhoneAuthStateNotifier(ref.read));
+
+class PhoneAuthStateNotifier extends StateNotifier<bool> {
+  PhoneAuthStateNotifier(this.read) : super(false);
+  var read;
   final auth = FirebaseAuth.instance;
+  String verificationId = '';
 
-  await auth.verifyPhoneNumber(
-    phoneNumber: '+81$phone',
-    timeout: const Duration(seconds: 30),
-    verificationCompleted: (PhoneAuthCredential credential) async {
-      // androidの処理を追加
-    },
-    verificationFailed: (FirebaseAuthException e) {
-      // Firebase Error
-      completer.complete(e.toString());
-    },
-    codeSent: (verificationId, resendToken) async {
-      // ダイアログをを表示するためにbool値を変更
-      ref.read(dialogStateProvider.notifier).update((state) => state = true);
+  Future<void> sendVerifyCode(String phone) async {
+    await auth.verifyPhoneNumber(
+      phoneNumber: '+81$phone',
+      timeout: const Duration(seconds: 30),
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        // androidの処理を追加
+      },
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (verificationId, resendToken) async {
+        this.verificationId = verificationId;
+        // ダイアログをを表示するためにbool値を変更
+        state = true;
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
 
-      // dialogをawaitさせる
-      // if (result == true) {
-      //   PhoneAuthCredential credential = PhoneAuthProvider.credential(
-      //     verificationId: verificationId,
-      //     smsCode: smsCodeController.text,
-      //   );
+  Future<void> registerUser(String smsCode) async {
+    final credential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    );
 
-      //   await auth.signInWithCredential(credential);
-      // }
-    },
-    codeAutoRetrievalTimeout: (String verificationId) {
-      completer.complete("timeout");
-    },
-  );
-
-  return completer.future;
-});
-
-final dialogStateProvider = StateProvider<bool>((ref) => false);
+    await auth.signInWithCredential(credential);
+  }
+}
