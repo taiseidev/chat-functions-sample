@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final phoneAuthProvider = StateNotifierProvider<PhoneAuthStateNotifier, bool>(
-    (ref) => PhoneAuthStateNotifier(ref.read));
+  (ref) => PhoneAuthStateNotifier(ref.read),
+);
 
 class PhoneAuthStateNotifier extends StateNotifier<bool> {
   PhoneAuthStateNotifier(this.read) : super(false);
@@ -23,7 +24,6 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
       verificationFailed: (FirebaseAuthException e) {},
       codeSent: (verificationId, resendToken) {
         this.verificationId = verificationId;
-        // ダイアログをを表示するためにbool値を変更
         state = true;
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
@@ -36,6 +36,6 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
       smsCode: smsCode,
     );
 
-    await auth.signInWithCredential(credential);
+    final user = await auth.signInWithCredential(credential);
   }
 }

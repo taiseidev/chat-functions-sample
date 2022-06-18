@@ -13,6 +13,13 @@ class TopPageBody extends ConsumerWidget {
   final phoneController = TextEditingController();
   final _phoneKey = GlobalKey<FormState>();
 
+  final border = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(16),
+    borderSide: const BorderSide(
+      color: Colors.black,
+    ),
+  );
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(
@@ -89,20 +96,11 @@ class TopPageBody extends ConsumerWidget {
                   decoration: InputDecoration(
                     labelText: '電話番号',
                     labelStyle: const TextStyle(color: Colors.black),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                      ),
-                    ),
                     floatingLabelStyle: const TextStyle(fontSize: 12),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    ),
+                    focusedBorder: border,
+                    enabledBorder: border,
+                    errorBorder: border,
+                    focusedErrorBorder: border,
                   ),
                 ),
               ),
