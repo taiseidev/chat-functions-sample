@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:chat_functions_app/data/service/firebase_service.dart';
+import 'package:chat_functions_app/utility/firebase_util.dart';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tuple/tuple.dart';
 
 final phoneAuthProvider = StateNotifierProvider<PhoneAuthStateNotifier, bool>(
   (ref) => PhoneAuthStateNotifier(ref.read),
@@ -35,7 +39,12 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
       verificationId: verificationId,
       smsCode: smsCode,
     );
-
-    final user = await auth.signInWithCredential(credential);
+    final deviceToken = await FirebaseUtil.getCurrentUserDeviceToken();
+    final userTuple = Tuple3<PhoneAuthCredential, String, String>(
+      credential,
+      '',
+      deviceToken!,
+    );
+    await read(registerUserProvider(userTuple));
   }
 }

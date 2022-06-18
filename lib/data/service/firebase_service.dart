@@ -6,28 +6,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:tuple/tuple.dart';
 
 final _db = FirebaseFirestore.instance;
-
-// Authに匿名ユーザーを登録
-final registerAnonymouslyUserProvider =
-    FutureProvider<UserCredential>((_) async {
-  final auth = FirebaseAuth.instance;
-  final result = await auth.signInAnonymously();
-  if (kDebugMode) {
-    print(result.user!.uid.toString());
-  }
-  return result;
-});
-// Firestoreにユーザーを登録
-final registerUserInFirestoreProvider =
-    FutureProvider.family((_, String uid) async {
-  return await FirebaseFirestore.instance.collection('user').doc(uid).set({
-    'id': uid,
-    'createdAt': DateTime.now(),
-    'updatedAt': DateTime.now(),
-  });
-});
+final _auth = FirebaseAuth.instance;
 
 // 特定のルームのチャットメッセージを取得
 final chatMessageProvider = StreamProvider((_) {
@@ -58,3 +40,27 @@ final chatNotificationDataProvider =
       );
   return stream;
 });
+
+// ユーザー登録
+final registerUserProvider = FutureProvider.family.autoDispose(
+  (_, Tuple3 tuple) async {
+    final user = await _auth.signInWithCredential(tuple.item1);
+    final uuid = user.user!.uid;
+
+    await _db.collection('user').doc(uuid).set({
+      'id': uuid,
+      'name': tuple.item2,
+      'token': tuple.item3,
+      'isChatted': false,
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  },
+);
+
+
+    // required String id,
+    // required String token,
+    // @Default(false) bool isChatted,
+    // required DateTime createdAt,
+    // required DateTime updatedAt,
