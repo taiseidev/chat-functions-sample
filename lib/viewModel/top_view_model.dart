@@ -36,7 +36,7 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
         // androidの処理を追加
       },
       verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (verificationId, resendToken) async {
+      codeSent: (verificationId, resendToken) {
         this.verificationId = verificationId;
         // ダイアログをを表示するためにbool値を変更
         state = true;
