@@ -114,7 +114,6 @@ class TopPageBody extends ConsumerWidget {
               title: '会員登録',
               onTap: () async {
                 if (_phoneKey.currentState!.validate()) {
-                  print('バリデーションチェックOK');
                   await ref
                       .read(phoneAuthProvider.notifier)
                       .sendVerifyCode(phoneController.text);

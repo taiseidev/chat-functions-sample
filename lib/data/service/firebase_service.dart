@@ -7,31 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
-class FirebaseService {
-  static Future<UserCredential> registerUser() async {
-    final auth = FirebaseAuth.instance;
-    final result = await auth.signInAnonymously();
-    return result;
-  }
-
-  static Future<void> registerUserDataToFirestore(String uid) async {
-    try {
-      final token = await FirebaseMessaging.instance.getToken();
-      await FirebaseFirestore.instance.collection('user').doc(uid).set({
-        'id': uid,
-        'deviceToken': token,
-        'isChatted': false,
-        'createdAt': DateTime.now(),
-        'updatedAt': DateTime.now(),
-      });
-    } on FirebaseException catch (err) {
-      if (kDebugMode) {
-        print(err);
-      }
-    }
-  }
-}
-
 final _db = FirebaseFirestore.instance;
 
 // Authに匿名ユーザーを登録
