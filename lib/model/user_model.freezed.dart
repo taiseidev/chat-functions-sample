@@ -23,8 +23,12 @@ mixin _$UserModel {
   String get id => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   bool get isChatted => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,8 +44,9 @@ abstract class $UserModelCopyWith<$Res> {
       {String id,
       String token,
       bool isChatted,
-      DateTime createdAt,
-      DateTime updatedAt});
+      @TimestampDateTimeConverter() DateTime? createdAt,
+      @TimestampDateTimeConverter() DateTime? updatedAt,
+      @TimestampDateTimeConverter() DateTime? deletedAt});
 }
 
 /// @nodoc
@@ -59,6 +64,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -76,11 +82,15 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
+      deletedAt: deletedAt == freezed
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -95,8 +105,9 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       {String id,
       String token,
       bool isChatted,
-      DateTime createdAt,
-      DateTime updatedAt});
+      @TimestampDateTimeConverter() DateTime? createdAt,
+      @TimestampDateTimeConverter() DateTime? updatedAt,
+      @TimestampDateTimeConverter() DateTime? deletedAt});
 }
 
 /// @nodoc
@@ -116,6 +127,7 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? isChatted = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? deletedAt = freezed,
   }) {
     return _then(_$_UserModel(
       id: id == freezed
@@ -133,11 +145,15 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: updatedAt == freezed
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
+      deletedAt: deletedAt == freezed
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -149,8 +165,9 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       {required this.id,
       required this.token,
       this.isChatted = false,
-      required this.createdAt,
-      required this.updatedAt});
+      @TimestampDateTimeConverter() this.createdAt,
+      @TimestampDateTimeConverter() this.updatedAt,
+      @TimestampDateTimeConverter() this.deletedAt});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -163,13 +180,18 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   @JsonKey()
   final bool isChatted;
   @override
-  final DateTime createdAt;
+  @TimestampDateTimeConverter()
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  @TimestampDateTimeConverter()
+  final DateTime? updatedAt;
+  @override
+  @TimestampDateTimeConverter()
+  final DateTime? deletedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(id: $id, token: $token, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(id: $id, token: $token, isChatted: $isChatted, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -181,7 +203,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       ..add(DiagnosticsProperty('token', token))
       ..add(DiagnosticsProperty('isChatted', isChatted))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('deletedAt', deletedAt));
   }
 
   @override
@@ -193,7 +216,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
             const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.isChatted, isChatted) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.deletedAt, deletedAt));
   }
 
   @JsonKey(ignore: true)
@@ -204,7 +228,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       const DeepCollectionEquality().hash(token),
       const DeepCollectionEquality().hash(isChatted),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+      const DeepCollectionEquality().hash(updatedAt),
+      const DeepCollectionEquality().hash(deletedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -222,8 +247,9 @@ abstract class _UserModel implements UserModel {
       {required final String id,
       required final String token,
       final bool isChatted,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$_UserModel;
+      @TimestampDateTimeConverter() final DateTime? createdAt,
+      @TimestampDateTimeConverter() final DateTime? updatedAt,
+      @TimestampDateTimeConverter() final DateTime? deletedAt}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -235,9 +261,14 @@ abstract class _UserModel implements UserModel {
   @override
   bool get isChatted => throw _privateConstructorUsedError;
   @override
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  @TimestampDateTimeConverter()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @override
+  @TimestampDateTimeConverter()
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

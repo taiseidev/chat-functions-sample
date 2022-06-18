@@ -10,8 +10,12 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       id: json['id'] as String,
       token: json['token'] as String,
       isChatted: json['isChatted'] as bool? ?? false,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      createdAt: const TimestampDateTimeConverter()
+          .fromJson(json['createdAt'] as Timestamp?),
+      updatedAt: const TimestampDateTimeConverter()
+          .fromJson(json['updatedAt'] as Timestamp?),
+      deletedAt: const TimestampDateTimeConverter()
+          .fromJson(json['deletedAt'] as Timestamp?),
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -19,6 +23,10 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'id': instance.id,
       'token': instance.token,
       'isChatted': instance.isChatted,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'createdAt':
+          const TimestampDateTimeConverter().toJson(instance.createdAt),
+      'updatedAt':
+          const TimestampDateTimeConverter().toJson(instance.updatedAt),
+      'deletedAt':
+          const TimestampDateTimeConverter().toJson(instance.deletedAt),
     };
