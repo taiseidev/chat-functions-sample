@@ -1,4 +1,5 @@
 import 'package:chat_functions_app/components/normal_button.dart';
+import 'package:chat_functions_app/components/normal_dialog.dart';
 import 'package:chat_functions_app/viewModel/top_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,26 +24,25 @@ class TopPageBody extends ConsumerWidget {
             context: context,
             barrierDismissible: false,
             builder: (_) {
-              return AlertDialog(
-                title: const Text("認証コードを入力"),
-                content: const Text("SMSにて認証コードを送信しました🚀"),
-                actions: [
-                  PinCodeTextField(
-                    controller: smsCodeController,
-                    autoFocus: true,
-                    length: 6,
-                    obscureText: false,
-                    animationType: AnimationType.fade,
-                    animationDuration: const Duration(milliseconds: 300),
-                    appContext: context,
-                    onChanged: (String value) {},
-                  ),
-                  NormalButton(
-                    title: '認証',
-                    onTap: () => Navigator.pop(context, true),
-                  ),
-                ],
-              );
+              return NormalDialog(
+                  title: '認証コードを入力',
+                  content: 'SMSにて認証コードを送信しました🚀',
+                  actions: Column(children: [
+                    PinCodeTextField(
+                      controller: smsCodeController,
+                      autoFocus: true,
+                      length: 6,
+                      obscureText: false,
+                      animationType: AnimationType.fade,
+                      animationDuration: const Duration(milliseconds: 300),
+                      appContext: context,
+                      onChanged: (String value) {},
+                    ),
+                    NormalButton(
+                      title: '認証',
+                      onTap: () => Navigator.pop(context, true),
+                    ),
+                  ]));
             },
           );
 
