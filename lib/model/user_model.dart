@@ -1,3 +1,5 @@
+import 'package:chat_functions_app/model/json_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -10,8 +12,9 @@ class UserModel with _$UserModel {
     required String id,
     required String token,
     @Default(false) bool isChatted,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    @TimestampDateTimeConverter() DateTime? createdAt,
+    @TimestampDateTimeConverter() DateTime? updatedAt,
+    @TimestampDateTimeConverter() DateTime? deletedAt,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
