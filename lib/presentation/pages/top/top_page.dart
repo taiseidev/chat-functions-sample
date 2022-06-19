@@ -2,7 +2,6 @@ import 'package:chat_functions_app/presentation/pages/top/top_page_background.da
 import 'package:chat_functions_app/presentation/pages/top/top_page_body.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class TopPage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            TopPageBackGround(),
+            const TopPageBackGround(),
             TopPageBody(),
           ],
         ),

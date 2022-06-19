@@ -3,9 +3,7 @@ import 'package:chat_functions_app/components/normal_dialog.dart';
 import 'package:chat_functions_app/viewModel/top_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:roggle/roggle.dart';
 
 class TopPageBody extends ConsumerWidget {
   TopPageBody({Key? key}) : super(key: key);
@@ -32,9 +30,10 @@ class TopPageBody extends ConsumerWidget {
             barrierDismissible: false,
             builder: (_) {
               return NormalDialog(
-                  title: '認証コードを入力',
-                  content: 'SMSにて認証コードを送信しました🚀',
-                  actions: Column(children: [
+                title: '認証コードを入力',
+                content: 'SMSにて認証コードを送信しました🚀',
+                actions: Column(
+                  children: [
                     PinCodeTextField(
                       controller: smsCodeController,
                       autoFocus: true,
@@ -49,7 +48,9 @@ class TopPageBody extends ConsumerWidget {
                       title: '認証',
                       onTap: () => Navigator.pop(context, true),
                     ),
-                  ]));
+                  ],
+                ),
+              );
             },
           );
 

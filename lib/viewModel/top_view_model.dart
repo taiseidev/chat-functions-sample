@@ -14,6 +14,7 @@ final phoneAuthProvider = StateNotifierProvider<PhoneAuthStateNotifier, bool>(
 
 class PhoneAuthStateNotifier extends StateNotifier<bool> {
   PhoneAuthStateNotifier(this.read) : super(false);
+  var isLoading = false;
   var read;
 
   final auth = FirebaseAuth.instance;
