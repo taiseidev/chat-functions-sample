@@ -28,6 +28,7 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
 
   Future<void> sendVerifyCode(String phone) async {
     state = state.copyWith(isLoading: true);
+    await Future.delayed(const Duration(seconds: 2));
     try {
       await auth.verifyPhoneNumber(
         phoneNumber: '+81$phone',
@@ -58,6 +59,7 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
   // TODO:refactor
   Future<void> registerUser(String smsCode, BuildContext context) async {
     state = state.copyWith(isDisplayDialog: false, isLoading: true);
+
     await Future.delayed(const Duration(seconds: 3));
     final credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
@@ -70,12 +72,9 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
       deviceToken!,
     );
     await read(registerUserProvider(userTuple));
-    state = state.copyWith(isLoading: false);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: ((context) => const HomePage()),
-      ),
+    state = state.copyWith(
+      isLoading: false,
+      isRegister: true,
     );
   }
 
@@ -99,5 +98,9 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
   // エラーメッセージ表示後にリセット
   void resetErrorMessage() {
     state = state.copyWith(errorMessage: '');
+  }
+
+  void resetIsRegister() {
+    state = state.copyWith(isRegister: false);
   }
 }
