@@ -24,7 +24,7 @@ class TopPageBody extends ConsumerWidget {
     ref.listen(
       phoneAuthProvider,
       (previous, next) async {
-        if (next == true) {
+        if (ref.watch(phoneAuthProvider).isDisplayDialog) {
           // ダイアログを発火
           final result = await showDialog(
             context: context,
@@ -124,7 +124,7 @@ class TopPageBody extends ConsumerWidget {
                 )
               ],
             ),
-            ref.watch(phoneAuthProvider.notifier).isLoading
+            ref.watch(phoneAuthProvider).isLoading
                 ? Stack(
                     alignment: Alignment.center,
                     children: [

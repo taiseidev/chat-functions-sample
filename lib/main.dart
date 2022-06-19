@@ -127,7 +127,7 @@ class MyApp extends HookConsumerWidget {
             return const CircularProgressIndicator();
           }
           if (snapshot.hasData) {
-            return HomePage();
+            return TopPage();
           }
           return TopPage();
         }),
