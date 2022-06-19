@@ -1,5 +1,6 @@
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/components/normal_dialog.dart';
+import 'package:chat_functions_app/components/normal_loading.dart';
 import 'package:chat_functions_app/viewModel/top_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -126,24 +127,8 @@ class TopPageBody extends ConsumerWidget {
               ],
             ),
             ref.watch(phoneAuthProvider).isLoading
-                ? Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Opacity(
-                        opacity: 0.6,
-                        child: Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      LoadingAnimationWidget.halfTriangleDot(
-                        color: Color.fromARGB(255, 16, 62, 101),
-                        size: 70,
-                      ),
-                    ],
-                  )
-                : SizedBox.shrink(),
+                ? NormalLoading()
+                : const SizedBox.shrink(),
           ],
         ),
       ),
