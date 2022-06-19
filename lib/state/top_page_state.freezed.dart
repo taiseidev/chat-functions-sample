@@ -19,6 +19,7 @@ mixin _$TopPageState {
   UserModel? get user => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isDisplayDialog => throw _privateConstructorUsedError;
+  bool get isRegister => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,6 +36,7 @@ abstract class $TopPageStateCopyWith<$Res> {
       {UserModel? user,
       bool isLoading,
       bool isDisplayDialog,
+      bool isRegister,
       String? errorMessage});
 
   $UserModelCopyWith<$Res>? get user;
@@ -53,6 +55,7 @@ class _$TopPageStateCopyWithImpl<$Res> implements $TopPageStateCopyWith<$Res> {
     Object? user = freezed,
     Object? isLoading = freezed,
     Object? isDisplayDialog = freezed,
+    Object? isRegister = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -67,6 +70,10 @@ class _$TopPageStateCopyWithImpl<$Res> implements $TopPageStateCopyWith<$Res> {
       isDisplayDialog: isDisplayDialog == freezed
           ? _value.isDisplayDialog
           : isDisplayDialog // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRegister: isRegister == freezed
+          ? _value.isRegister
+          : isRegister // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
@@ -98,6 +105,7 @@ abstract class _$$_TopPageStateCopyWith<$Res>
       {UserModel? user,
       bool isLoading,
       bool isDisplayDialog,
+      bool isRegister,
       String? errorMessage});
 
   @override
@@ -120,6 +128,7 @@ class __$$_TopPageStateCopyWithImpl<$Res>
     Object? user = freezed,
     Object? isLoading = freezed,
     Object? isDisplayDialog = freezed,
+    Object? isRegister = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_$_TopPageState(
@@ -135,6 +144,10 @@ class __$$_TopPageStateCopyWithImpl<$Res>
           ? _value.isDisplayDialog
           : isDisplayDialog // ignore: cast_nullable_to_non_nullable
               as bool,
+      isRegister: isRegister == freezed
+          ? _value.isRegister
+          : isRegister // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -146,10 +159,11 @@ class __$$_TopPageStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TopPageState implements _TopPageState {
-  const _$_TopPageState(
+  _$_TopPageState(
       {this.user,
       this.isLoading = false,
       this.isDisplayDialog = false,
+      this.isRegister = false,
       this.errorMessage = ''});
 
   @override
@@ -162,11 +176,14 @@ class _$_TopPageState implements _TopPageState {
   final bool isDisplayDialog;
   @override
   @JsonKey()
+  final bool isRegister;
+  @override
+  @JsonKey()
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'TopPageState(user: $user, isLoading: $isLoading, isDisplayDialog: $isDisplayDialog, errorMessage: $errorMessage)';
+    return 'TopPageState(user: $user, isLoading: $isLoading, isDisplayDialog: $isDisplayDialog, isRegister: $isRegister, errorMessage: $errorMessage)';
   }
 
   @override
@@ -179,6 +196,8 @@ class _$_TopPageState implements _TopPageState {
             const DeepCollectionEquality()
                 .equals(other.isDisplayDialog, isDisplayDialog) &&
             const DeepCollectionEquality()
+                .equals(other.isRegister, isRegister) &&
+            const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
   }
 
@@ -188,6 +207,7 @@ class _$_TopPageState implements _TopPageState {
       const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(isDisplayDialog),
+      const DeepCollectionEquality().hash(isRegister),
       const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
@@ -197,10 +217,11 @@ class _$_TopPageState implements _TopPageState {
 }
 
 abstract class _TopPageState implements TopPageState {
-  const factory _TopPageState(
+  factory _TopPageState(
       {final UserModel? user,
       final bool isLoading,
       final bool isDisplayDialog,
+      final bool isRegister,
       final String? errorMessage}) = _$_TopPageState;
 
   @override
@@ -209,6 +230,8 @@ abstract class _TopPageState implements TopPageState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   bool get isDisplayDialog => throw _privateConstructorUsedError;
+  @override
+  bool get isRegister => throw _privateConstructorUsedError;
   @override
   String? get errorMessage => throw _privateConstructorUsedError;
   @override

@@ -9,6 +9,7 @@ class TopPageState with _$TopPageState {
     UserModel? user,
     @Default(false) bool isLoading,
     @Default(false) bool isDisplayDialog,
+    @Default(false) bool isRegister,
     @Default('') String? errorMessage,
   }) = _TopPageState;
 }

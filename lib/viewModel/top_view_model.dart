@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chat_functions_app/config/enum/firebase_enum.dart';
 import 'package:chat_functions_app/data/service/firebase_service.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/state/top_page_state.dart';
@@ -27,6 +28,7 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
 
   Future<void> sendVerifyCode(String phone) async {
     state = state.copyWith(isLoading: true);
+    await Future.delayed(const Duration(seconds: 2));
     try {
       await auth.verifyPhoneNumber(
         phoneNumber: '+81$phone',
@@ -34,11 +36,12 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
         verificationCompleted: (PhoneAuthCredential credential) async {
           // androidの処理を追加
         },
-        verificationFailed: (FirebaseAuthException e) {
-          roggle.wtf('FIREBASE ERROR:$e');
+        verificationFailed: (FirebaseAuthException error) {
+          roggle.wtf('FIREBASE ERROR:$error');
+          final message = getErrorMessage(error);
           state = state.copyWith(
             isLoading: false,
-            errorMessage: e.toString(),
+            errorMessage: message,
           );
         },
         codeSent: (verificationId, resendToken) {
@@ -56,7 +59,8 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
   // TODO:refactor
   Future<void> registerUser(String smsCode, BuildContext context) async {
     state = state.copyWith(isDisplayDialog: false, isLoading: true);
-    await Future.delayed(Duration(seconds: 3));
+
+    await Future.delayed(const Duration(seconds: 3));
     final credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: smsCode,
@@ -68,16 +72,35 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
       deviceToken!,
     );
     await read(registerUserProvider(userTuple));
-    state = state.copyWith(isLoading: false);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: ((context) => const HomePage()),
-      ),
+    state = state.copyWith(
+      isLoading: false,
+      isRegister: true,
     );
   }
 
+  // FirebaseExceptionからエラーメッセージを取得
+  String getErrorMessage(FirebaseAuthException result) {
+    String message = '';
+    switch (result.code) {
+      case 'too-many-requests':
+        message = FirebaseAuthResultStatus.TooManyRequest.message;
+        break;
+      case 'operation-not-allowed':
+        message = FirebaseAuthResultStatus.OperationNotAllowed.message;
+        break;
+      default:
+        message = FirebaseAuthResultStatus.Undefined.message;
+        break;
+    }
+    return message;
+  }
+
+  // エラーメッセージ表示後にリセット
   void resetErrorMessage() {
     state = state.copyWith(errorMessage: '');
+  }
+
+  void resetIsRegister() {
+    state = state.copyWith(isRegister: false);
   }
 }
