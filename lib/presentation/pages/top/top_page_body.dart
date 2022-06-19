@@ -5,7 +5,6 @@ import 'package:chat_functions_app/viewModel/top_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class TopPageBody extends ConsumerWidget {
   TopPageBody({Key? key}) : super(key: key);
