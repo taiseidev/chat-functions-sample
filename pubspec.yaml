@@ -59,6 +59,7 @@ dependencies:
   pin_code_fields: ^7.4.0
   roggle: ^0.2.1+1
   tuple: ^2.0.0
+  loading_animation_widget: ^1.2.0+2
 dev_dependencies:
   flutter_test:
     sdk: flutter
