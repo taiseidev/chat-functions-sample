@@ -5,9 +5,10 @@ part 'top_page_state.freezed.dart';
 
 @freezed
 class TopPageState with _$TopPageState {
-  const factory TopPageState({
+  factory TopPageState({
     UserModel? user,
     @Default(false) bool isLoading,
     @Default(false) bool isDisplayDialog,
+    @Default('') String? errorMessage,
   }) = _TopPageState;
 }

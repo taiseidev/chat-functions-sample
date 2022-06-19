@@ -19,6 +19,7 @@ mixin _$TopPageState {
   UserModel? get user => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isDisplayDialog => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TopPageStateCopyWith<TopPageState> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $TopPageStateCopyWith<$Res> {
   factory $TopPageStateCopyWith(
           TopPageState value, $Res Function(TopPageState) then) =
       _$TopPageStateCopyWithImpl<$Res>;
-  $Res call({UserModel? user, bool isLoading, bool isDisplayDialog});
+  $Res call(
+      {UserModel? user,
+      bool isLoading,
+      bool isDisplayDialog,
+      String? errorMessage});
 
   $UserModelCopyWith<$Res>? get user;
 }
@@ -48,6 +53,7 @@ class _$TopPageStateCopyWithImpl<$Res> implements $TopPageStateCopyWith<$Res> {
     Object? user = freezed,
     Object? isLoading = freezed,
     Object? isDisplayDialog = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       user: user == freezed
@@ -62,6 +68,10 @@ class _$TopPageStateCopyWithImpl<$Res> implements $TopPageStateCopyWith<$Res> {
           ? _value.isDisplayDialog
           : isDisplayDialog // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -84,7 +94,11 @@ abstract class _$$_TopPageStateCopyWith<$Res>
           _$_TopPageState value, $Res Function(_$_TopPageState) then) =
       __$$_TopPageStateCopyWithImpl<$Res>;
   @override
-  $Res call({UserModel? user, bool isLoading, bool isDisplayDialog});
+  $Res call(
+      {UserModel? user,
+      bool isLoading,
+      bool isDisplayDialog,
+      String? errorMessage});
 
   @override
   $UserModelCopyWith<$Res>? get user;
@@ -106,6 +120,7 @@ class __$$_TopPageStateCopyWithImpl<$Res>
     Object? user = freezed,
     Object? isLoading = freezed,
     Object? isDisplayDialog = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_TopPageState(
       user: user == freezed
@@ -120,6 +135,10 @@ class __$$_TopPageStateCopyWithImpl<$Res>
           ? _value.isDisplayDialog
           : isDisplayDialog // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -128,7 +147,10 @@ class __$$_TopPageStateCopyWithImpl<$Res>
 
 class _$_TopPageState implements _TopPageState {
   const _$_TopPageState(
-      {this.user, this.isLoading = false, this.isDisplayDialog = false});
+      {this.user,
+      this.isLoading = false,
+      this.isDisplayDialog = false,
+      this.errorMessage = ''});
 
   @override
   final UserModel? user;
@@ -138,10 +160,13 @@ class _$_TopPageState implements _TopPageState {
   @override
   @JsonKey()
   final bool isDisplayDialog;
+  @override
+  @JsonKey()
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'TopPageState(user: $user, isLoading: $isLoading, isDisplayDialog: $isDisplayDialog)';
+    return 'TopPageState(user: $user, isLoading: $isLoading, isDisplayDialog: $isDisplayDialog, errorMessage: $errorMessage)';
   }
 
   @override
@@ -152,7 +177,9 @@ class _$_TopPageState implements _TopPageState {
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
-                .equals(other.isDisplayDialog, isDisplayDialog));
+                .equals(other.isDisplayDialog, isDisplayDialog) &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
   }
 
   @override
@@ -160,7 +187,8 @@ class _$_TopPageState implements _TopPageState {
       runtimeType,
       const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(isDisplayDialog));
+      const DeepCollectionEquality().hash(isDisplayDialog),
+      const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +200,8 @@ abstract class _TopPageState implements TopPageState {
   const factory _TopPageState(
       {final UserModel? user,
       final bool isLoading,
-      final bool isDisplayDialog}) = _$_TopPageState;
+      final bool isDisplayDialog,
+      final String? errorMessage}) = _$_TopPageState;
 
   @override
   UserModel? get user => throw _privateConstructorUsedError;
@@ -180,6 +209,8 @@ abstract class _TopPageState implements TopPageState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   bool get isDisplayDialog => throw _privateConstructorUsedError;
+  @override
+  String? get errorMessage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TopPageStateCopyWith<_$_TopPageState> get copyWith =>

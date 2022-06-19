@@ -62,6 +62,27 @@ class TopPageBody extends ConsumerWidget {
                 .registerUser(smsCodeController.text, context);
           }
         }
+        if (ref.watch(phoneAuthProvider).errorMessage!.isNotEmpty) {
+          // ダイアログを発火
+          final result = await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) {
+              return NormalDialog(
+                title: 'エラー',
+                content: ref.watch(phoneAuthProvider).errorMessage,
+                actions: Column(
+                  children: [
+                    NormalButton(
+                      title: '閉じる',
+                      onTap: () => Navigator.pop(context, true),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        }
       },
     );
     return GestureDetector(

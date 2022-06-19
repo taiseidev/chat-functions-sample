@@ -12,14 +12,14 @@ import 'package:roggle/roggle.dart';
 import 'package:tuple/tuple.dart';
 
 final phoneAuthProvider =
-    StateNotifierProvider<PhoneAuthStateNotifier, TopPageState>(
+    StateNotifierProvider.autoDispose<PhoneAuthStateNotifier, TopPageState>(
   (ref) => PhoneAuthStateNotifier(ref.read),
 );
 
 class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
   final roggle = GetIt.I<Roggle>();
 
-  PhoneAuthStateNotifier(this.read) : super(const TopPageState());
+  PhoneAuthStateNotifier(this.read) : super(TopPageState());
   var read;
 
   final auth = FirebaseAuth.instance;
@@ -36,7 +36,10 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
         },
         verificationFailed: (FirebaseAuthException e) {
           roggle.wtf('FIREBASE ERROR:$e');
-          state = state.copyWith(isLoading: false);
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: e.toString(),
+          );
         },
         codeSent: (verificationId, resendToken) {
           this.verificationId = verificationId;
