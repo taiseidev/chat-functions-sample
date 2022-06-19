@@ -76,4 +76,8 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
       ),
     );
   }
+
+  void resetErrorMessage() {
+    state = state.copyWith(errorMessage: '');
+  }
 }

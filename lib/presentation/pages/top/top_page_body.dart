@@ -82,6 +82,7 @@ class TopPageBody extends ConsumerWidget {
               );
             },
           );
+          ref.read(phoneAuthProvider.notifier).resetErrorMessage();
         }
       },
     );
