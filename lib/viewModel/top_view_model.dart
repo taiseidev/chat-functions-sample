@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:chat_functions_app/data/service/firebase_service.dart';
+import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/utility/firebase_util.dart';
-import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tuple/tuple.dart';
 
@@ -34,7 +35,8 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
     );
   }
 
-  Future<void> registerUser(String smsCode) async {
+  // TODO:refactor
+  Future<void> registerUser(String smsCode, BuildContext context) async {
     final credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: smsCode,
@@ -46,5 +48,11 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
       deviceToken!,
     );
     await read(registerUserProvider(userTuple));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: ((context) => HomePage()),
+      ),
+    );
   }
 }

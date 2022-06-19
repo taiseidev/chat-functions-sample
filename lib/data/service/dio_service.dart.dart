@@ -19,7 +19,7 @@ class DioDataSource {
   Dio dio;
   Future<Response> sendMessageForSomeone() async {
     final uid = FirebaseUtil.getCurrentUserUid();
-    final deviceToken = await FirebaseMessaging.instance.getToken();
+    final deviceToken = await FirebaseUtil.getCurrentUserDeviceToken();
     dio.interceptors.add(
       LogInterceptor(),
     );

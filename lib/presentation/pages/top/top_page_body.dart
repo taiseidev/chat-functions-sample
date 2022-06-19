@@ -56,7 +56,7 @@ class TopPageBody extends ConsumerWidget {
           if (result) {
             await ref
                 .read(phoneAuthProvider.notifier)
-                .registerUser(smsCodeController.text);
+                .registerUser(smsCodeController.text, context);
           }
         }
       },
