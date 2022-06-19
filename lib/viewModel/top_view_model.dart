@@ -7,6 +7,8 @@ import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
+import 'package:roggle/roggle.dart';
 import 'package:tuple/tuple.dart';
 
 final phoneAuthProvider =
@@ -15,6 +17,8 @@ final phoneAuthProvider =
 );
 
 class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
+  final roggle = GetIt.I<Roggle>();
+
   PhoneAuthStateNotifier(this.read) : super(const TopPageState());
   var read;
 
@@ -30,7 +34,10 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
         verificationCompleted: (PhoneAuthCredential credential) async {
           // androidの処理を追加
         },
-        verificationFailed: (FirebaseAuthException e) {},
+        verificationFailed: (FirebaseAuthException e) {
+          roggle.wtf('FIREBASE ERROR:$e');
+          state = state.copyWith(isLoading: false);
+        },
         codeSent: (verificationId, resendToken) {
           this.verificationId = verificationId;
           state = state.copyWith(

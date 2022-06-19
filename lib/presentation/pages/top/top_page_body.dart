@@ -115,6 +115,7 @@ class TopPageBody extends ConsumerWidget {
                 NormalButton(
                   title: '会員登録',
                   onTap: () async {
+                    FocusScope.of(context).unfocus();
                     if (_phoneKey.currentState!.validate()) {
                       await ref
                           .read(phoneAuthProvider.notifier)
