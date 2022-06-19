@@ -1,40 +1,62 @@
 import 'dart:async';
 
 import 'package:chat_functions_app/data/service/firebase_service.dart';
+import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
+import 'package:chat_functions_app/state/top_page_state.dart';
 import 'package:chat_functions_app/utility/firebase_util.dart';
-import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
+import 'package:roggle/roggle.dart';
 import 'package:tuple/tuple.dart';
 
-final phoneAuthProvider = StateNotifierProvider<PhoneAuthStateNotifier, bool>(
+final phoneAuthProvider =
+    StateNotifierProvider.autoDispose<PhoneAuthStateNotifier, TopPageState>(
   (ref) => PhoneAuthStateNotifier(ref.read),
 );
 
-class PhoneAuthStateNotifier extends StateNotifier<bool> {
-  PhoneAuthStateNotifier(this.read) : super(false);
+class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
+  final roggle = GetIt.I<Roggle>();
+
+  PhoneAuthStateNotifier(this.read) : super(TopPageState());
   var read;
 
   final auth = FirebaseAuth.instance;
   String verificationId = '';
 
   Future<void> sendVerifyCode(String phone) async {
-    await auth.verifyPhoneNumber(
-      phoneNumber: '+81$phone',
-      timeout: const Duration(seconds: 30),
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        // androidの処理を追加
-      },
-      verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (verificationId, resendToken) {
-        this.verificationId = verificationId;
-        state = true;
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {},
-    );
+    state = state.copyWith(isLoading: true);
+    try {
+      await auth.verifyPhoneNumber(
+        phoneNumber: '+81$phone',
+        timeout: const Duration(seconds: 30),
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // androidの処理を追加
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          roggle.wtf('FIREBASE ERROR:$e');
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: e.toString(),
+          );
+        },
+        codeSent: (verificationId, resendToken) {
+          this.verificationId = verificationId;
+          state = state.copyWith(
+            isDisplayDialog: true,
+            isLoading: false,
+          );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } on FirebaseAuthException catch (e) {}
   }
 
-  Future<void> registerUser(String smsCode) async {
+  // TODO:refactor
+  Future<void> registerUser(String smsCode, BuildContext context) async {
+    state = state.copyWith(isDisplayDialog: false, isLoading: true);
+    await Future.delayed(Duration(seconds: 3));
     final credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: smsCode,
@@ -46,5 +68,16 @@ class PhoneAuthStateNotifier extends StateNotifier<bool> {
       deviceToken!,
     );
     await read(registerUserProvider(userTuple));
+    state = state.copyWith(isLoading: false);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: ((context) => const HomePage()),
+      ),
+    );
+  }
+
+  void resetErrorMessage() {
+    state = state.copyWith(errorMessage: '');
   }
 }

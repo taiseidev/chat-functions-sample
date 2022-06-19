@@ -1,10 +1,12 @@
 import 'package:chat_functions_app/data/service/firebase_analytics_service.dart';
 import 'package:chat_functions_app/data/service/navigator_service.dart';
 import 'package:chat_functions_app/firebase_options.dart';
+import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
 import 'package:chat_functions_app/theme/normal_button_style.dart';
 import 'package:chat_functions_app/theme/positive_or_negative_button_style.dart';
 import 'package:fcm_config/fcm_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +120,18 @@ class MyApp extends HookConsumerWidget {
           ),
         ],
       ),
-      home: const TopPage(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasData) {
+            return TopPage();
+          }
+          return TopPage();
+        }),
+      ),
     );
   }
 }

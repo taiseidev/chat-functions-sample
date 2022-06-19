@@ -57,10 +57,3 @@ final registerUserProvider = FutureProvider.family.autoDispose(
     });
   },
 );
-
-
-    // required String id,
-    // required String token,
-    // @Default(false) bool isChatted,
-    // required DateTime createdAt,
-    // required DateTime updatedAt,
