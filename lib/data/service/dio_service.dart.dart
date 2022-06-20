@@ -1,7 +1,5 @@
 import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:dio/dio.dart';
-import 'package:fcm_config/fcm_config.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

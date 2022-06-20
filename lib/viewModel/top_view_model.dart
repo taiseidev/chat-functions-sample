@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:chat_functions_app/config/enum/firebase_enum.dart';
 import 'package:chat_functions_app/data/service/firebase_service.dart';
-import 'package:chat_functions_app/presentation/pages/home/home_page.dart';
 import 'package:chat_functions_app/state/top_page_state.dart';
 import 'package:chat_functions_app/utility/firebase_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -53,7 +52,7 @@ class PhoneAuthStateNotifier extends StateNotifier<TopPageState> {
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
-    } on FirebaseAuthException catch (e) {}
+    } on FirebaseAuthException {}
   }
 
   // TODO:refactor
