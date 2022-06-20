@@ -11,7 +11,7 @@ class NormalDialog extends ConsumerWidget {
 
   final String? title;
   final String? content;
-  final Column? actions;
+  final Widget? actions;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
