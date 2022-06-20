@@ -93,6 +93,7 @@ class MyApp extends HookConsumerWidget {
     useEffect(() {
       final loginState = ref.read(sharedPreferencesProvider);
       isLogined = loginState.getBool('loginState');
+      return null;
     }, []);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -127,9 +128,9 @@ class MyApp extends HookConsumerWidget {
             return const CircularProgressIndicator();
           }
           if (snapshot.hasData) {
-            return TopPage();
+            return const HomePage();
           }
-          return TopPage();
+          return const TopPage();
         }),
       ),
     );

@@ -1,4 +1,8 @@
+import 'package:chat_functions_app/components/normal_button.dart';
+import 'package:chat_functions_app/components/normal_dialog.dart';
 import 'package:chat_functions_app/presentation/pages/chat_notification/chat_notification_page.dart';
+import 'package:chat_functions_app/presentation/pages/top/top_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -67,6 +71,52 @@ class SettingScreen extends StatelessWidget {
                     initialValue: true,
                     leading: const Icon(Icons.notifications_outlined),
                     title: const Text('通知'),
+                  ),
+                ],
+              ),
+              SettingsSection(
+                tiles: <SettingsTile>[
+                  SettingsTile.navigation(
+                    leading: const Icon(Icons.exit_to_app),
+                    title: const Text('ログアウト'),
+                    onPressed: (value) async {
+                      await showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) {
+                          return NormalDialog(
+                            title: 'ログアウトしますか？',
+                            content: 'ログアウトしてもデータは削除されません。',
+                            actions: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                NormalButton(
+                                  title: 'ログアウト',
+                                  onTap: () async {
+                                    final auth = FirebaseAuth.instance;
+                                    await auth.signOut();
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: ((context) => TopPage()),
+                                      ),
+                                      (_) => false,
+                                    );
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                NormalButton(
+                                  title: '閉じる',
+                                  onTap: () => Navigator.pop(context),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               ),

@@ -15,6 +15,7 @@ class ChatNotificationBody extends HookConsumerWidget {
       } else {
         collectionName = 'send';
       }
+      return null;
     }, []);
     final snapshot = ref.watch(chatNotificationProvider(collectionName));
     return snapshot.when(

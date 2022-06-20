@@ -2,7 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 // アナリティクスイベント
 enum AnalyticsEvent {
-  Button,
+  button,
 }
 
 // 送りたいイベントがあったらこのクラスに列挙していく
@@ -14,7 +14,7 @@ class AnalyticsService {
   // ボタンタップイベント送信
   Future<void> sendButtonEvent({required String buttonName}) async {
     sendEvent(
-      event: AnalyticsEvent.Button,
+      event: AnalyticsEvent.button,
       parameterMap: {'buttonName': buttonName},
     );
   }
