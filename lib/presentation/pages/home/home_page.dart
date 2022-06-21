@@ -1,8 +1,6 @@
-import 'package:chat_functions_app/main.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page_body.dart';
 import 'package:chat_functions_app/presentation/pages/home/home_page_footer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -10,12 +8,6 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 匿名認証のログインをtrueに
-    useEffect(() {
-      final loginState = ref.read(sharedPreferencesProvider);
-      loginState.setBool('loginState', true);
-      return null;
-    }, []);
     return const Scaffold(
       body: HomePageBody(),
       bottomNavigationBar: HomePageFooter(),
