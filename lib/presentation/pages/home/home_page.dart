@@ -10,12 +10,6 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 匿名認証のログインをtrueに
-    useEffect(() {
-      final loginState = ref.read(sharedPreferencesProvider);
-      loginState.setBool('loginState', true);
-      return null;
-    }, []);
     return const Scaffold(
       body: HomePageBody(),
       bottomNavigationBar: HomePageFooter(),
