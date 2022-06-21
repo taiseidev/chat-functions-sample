@@ -64,24 +64,6 @@ class TopPageBody extends ConsumerWidget {
         }
         if (ref.watch(phoneAuthProvider).errorMessage!.isNotEmpty) {
           // ダイアログを発火
-          final result = await showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (_) {
-              return NormalDialog(
-                title: 'エラー',
-                content: ref.watch(phoneAuthProvider).errorMessage,
-                actions: Column(
-                  children: [
-                    NormalButton(
-                      title: '閉じる',
-                      onTap: () => Navigator.pop(context, true),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
           ref.read(phoneAuthProvider.notifier).resetErrorMessage();
         }
 
@@ -160,7 +142,7 @@ class TopPageBody extends ConsumerWidget {
               ],
             ),
             ref.watch(phoneAuthProvider).isLoading
-                ? NormalLoading()
+                ? const NormalLoading()
                 : const SizedBox.shrink(),
           ],
         ),

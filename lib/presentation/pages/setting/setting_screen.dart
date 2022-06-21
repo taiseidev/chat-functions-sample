@@ -98,7 +98,7 @@ class SettingScreen extends StatelessWidget {
                                     Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: ((context) => TopPage()),
+                                        builder: ((context) => const TopPage()),
                                       ),
                                       (_) => false,
                                     );

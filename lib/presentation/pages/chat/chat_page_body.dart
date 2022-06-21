@@ -1,10 +1,8 @@
 import 'package:chat_functions_app/components/normal_button.dart';
 import 'package:chat_functions_app/components/normal_dialog.dart';
-import 'package:chat_functions_app/data/service/firebase_analytics_service.dart';
 import 'package:chat_functions_app/viewModel/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
 
 class ChatPageBody extends ConsumerWidget {
